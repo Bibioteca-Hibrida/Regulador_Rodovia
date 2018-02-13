@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Regulador Rodoviario</string>
+    <string name="entrar">Entrar</string>
+    <string name="codigo">Digite o seu codigo do agente</string>
+    <string name="senha">Digite a sua senha do agente</string>
+    <string name="cadastrar">Cadastrar Multa</string>
+    <string name="consultar">Consultar Multa</string>
+    <string name="perfil">Conta</string>
+    <string name="verArtigo">Consultar Artigo</string>
+    <string name="gerarRe">Gerar Relatorio</string>
+    <string name="Esqueci">Esqueci a senha!</string>
+    <string name="nrcarta">Numero de carta:</string>
+    <string name="nomecondutor">Nome do condutor:</string>
+    <string name="nomeInfra">Artigo infringido:</string>
+    <string name="disposto">Disposto infringido:</string>
+    <string name="provincia">Província:</string>
+    <string name="distrito">Distrito:</string>
+    <string name="matricuViatura">Matrícula da viatura:</string>
+    <string name="nota">Descrição do auto de transgressão:</string>
+    <string name="referncia">Referência da transgressão:</string>
+    <string name="refernciaArtigo">Referência do Artigo:</string>
+    <string name="local">Local da transgressão:</string>
+    <string name="valor">Valor da multa:</string>
+    <string name="marca">Marca da viatura:</string>
+    <string name="tipo">Tipo da viatura:</string>
+    <string name="classe">Classe da viatura:</string>
+    <string name="cor">Cor da viatura:</string>
+    <string name="proprietario">Nome do proprietario da viatura:</string>
+    <string name="servico">Serviço da viatura:</string>
+    <string name="title_activity_main">main</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="explicao">Como ocorreu?</string>
+    <string name="title_activity_comprovativo_multa">Comprovativo_multa</string>
+    <string name="autoTransgressao">Auto de transgressão numero:</string>
+    <string name="avisoNr">Aviso numero:</string>
+    <string name="codigoAgenteNr">Codigo de agente numero:</string>
+    <string name="data">Data e hora:</string>
+    <string name="NomeAgente">Nome do agente:</string>
+    <string name="categoria">Categoria da carta:</string>
+    <string name="localEmissao">Local de emissão:</string>
+    <string name="dataemissao">Data de emissão </string>
+    <string name="Binr">BI numero:</string>
+    <string name="Artigo">Artigo numero:</string>
+    <string name="Disposto">Disposto numero:</string>
+    <string name="marcavia">Marca da viatura:</string>
+    <string name="estadocilvi">Estado civil:</string>
+    <string name="tipo_multa">Responsável da multa:</string>
+    <string name="localAcontecimento">Praça, lago, Avenida, etc.</string>
+    <string name="OK">OK</string>
+    <string name="pesquisaNome">Nome</string>
+    <string name="pesquisa">Pesquisa por:</string>
+    <string name="pesquisaCarta">Numero de carta</string>
+
+
+</resources>

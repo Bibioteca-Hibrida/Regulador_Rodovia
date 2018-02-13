@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="10dp"
+
+    tools:context="mz.gerasoft.regulador_rodovia.CadastrarMulta">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+        <TextView
+            android:id="@+id/numeroCarta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nrcarta"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_alignBaseline="@+id/editText16"
+            android:layout_alignBottom="@+id/editText16"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutoCompleteCarta"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/numeroCarta"
+
+
+            />
+
+        <EditText
+            android:id="@+id/nameCondutor"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="1"
+            android:enabled="false"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/nameCondutor"
+            />
+
+        <TextView
+            android:id="@+id/idmatricula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/matricuViatura"
+            android:textSize="18dp" />
+        <AutoCompleteTextView
+            android:id="@+id/matriculaV"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/idmatricula"
+            />
+
+        <TextView
+            android:id="@+id/idrefencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/referncia"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:id="@+id/referenciaInfracao"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/idrefencia"
+
+
+            />
+
+        <TextView
+            android:id="@+id/nameInfra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nomeInfra"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutoinfracao"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+
+
+            />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="54dp"
+            android:layout_height="17dp"
+
+            app:srcCompat="@mipmap/ver" />
+
+        <TextView
+            android:id="@+id/namedisposto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disposto"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_alignParentStart="true"
+           />
+
+
+        <Spinner
+            android:id="@+id/multiAutodisposto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/namedisposto" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="54dp"
+            android:layout_height="17dp"
+            android:layout_weight="0.03"
+
+            android:onClick="mostrarArtigo"
+            app:srcCompat="@mipmap/ver"
+            />
+
+        <TextView
+            android:id="@+id/idlocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/local"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/LocalInfacao"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="10"
+            android:hint="@string/localAcontecimento"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/idloca"
+            />
+
+
+
+        <TextView
+            android:id="@+id/idprovincia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/provincia"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutoprovincia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/idprovincia"
+
+            />
+
+        <TextView
+            android:id="@+id/iddistrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/distrito"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_alignParentStart="true"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutodistrito"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/iddistrito"
+
+
+            />
+
+        <TextView
+            android:id="@+id/idtipoMulta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo_multa"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:id="@+id/tipoMulta"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/idtipoMulta"
+            />
+
+
+        <TextView
+            android:id="@+id/idmarca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/marca"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutomarca"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:layout_below="@+id/idmarca"
+
+            />
+        <TextView
+            android:id="@+id/idtipoV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutotipoV"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:layout_below="@+id/idtipoV"
+
+            />
+
+        <TextView
+            android:id="@+id/idclasseV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/classe"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:textSize="18dp"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutoclasse"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:layout_below="@+id/idclasseV"
+
+            />
+
+        <TextView
+            android:id="@+id/idcor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cor"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutocor"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:layout_below="@+id/idcor"
+
+            />
+
+        <TextView
+            android:id="@+id/idservico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/servico"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/multiAutoservico"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            android:layout_below="@+id/idservico"
+
+            />
+
+        <TextView
+            android:id="@+id/idnomeP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/proprietario"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/nomeP"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="10"
+            android:visibility="gone"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/idnomeP"
+            />
+
+
+        <TextView
+            android:id="@+id/idnota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nota"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/nota"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="10"
+            android:hint="@string/explicao"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/idnota"
+            />
+
+        <TextView
+            android:id="@+id/idvalor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:onClick="findMoneyMulta"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/valor"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:ems="10"
+            android:inputType="number"
+            android:enabled="false"
+            android:layout_below="@+id/idvalor"/>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"  >
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/editText17"
+                android:layout_alignParentBottom="true"
+                android:background="#FFFF"
+                android:elevation="10dp"
+                android:onClick="cleanSpace"
+                app:srcCompat="@mipmap/cancel" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/multiAutoCompleteTextView"
+                android:background="#FFFF"
+                android:elevation="10dp"
+                android:onClick="onCadatro"
+                app:srcCompat="@mipmap/save" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

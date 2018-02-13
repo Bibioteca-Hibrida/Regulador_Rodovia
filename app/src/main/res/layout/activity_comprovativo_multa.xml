@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="10dp"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/view1"
+            android:layout_marginTop="10sp"
+            android:layout_margin="5sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/autoTransgressao"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/autoTransgressaonr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:gravity="right"
+            android:textSize="14dp"/>
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view2"
+            android:layout_below="@id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/avisoNr"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/avisonr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/autoTransgressaonr"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view3"
+            android:layout_below="@id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/codigoAgenteNr"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/codagente"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/avisonr"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view4"
+            android:layout_below="@id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/data"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/dataHora"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/codagente"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view5"
+            android:layout_below="@id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/provincia"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/prov"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/dataHora"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view6"
+            android:layout_below="@id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/distrito"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/distr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/prov"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view7"
+            android:layout_below="@id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/NomeAgente"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/agenteName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/distr"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view8"
+            android:layout_below="@id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/nomecondutor"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/condutorNome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/agenteName"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view9"
+            android:layout_below="@id/view8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/nrcarta"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/condutorCarta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/condutorNome"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view10"
+            android:layout_below="@id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/categoria"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/categoriaCarta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/condutorCarta"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view11"
+            android:layout_below="@id/view10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/localEmissao"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/localEmis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/categoriaCarta"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view12"
+            android:layout_below="@id/view11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/dataemissao"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/dataEmis"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/localEmis"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view13"
+            android:layout_below="@id/view12"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/estadocilvi"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/estadoC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/dataEmis"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view14"
+            android:layout_below="@id/view13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/Binr"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/biNR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/estadoC"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view15"
+            android:layout_below="@id/view14"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/Artigo"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/artigo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/biNR"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view17"
+            android:layout_below="@id/view15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/Disposto"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/nrdisposto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/artigo"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view18"
+            android:layout_below="@id/view17"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/referncia"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/referenciaMulta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/nrdisposto"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view25"
+            android:layout_below="@id/view18"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tipo_multa"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/responsavelmulta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/referenciaMulta"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view30"
+            android:layout_below="@id/view25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/local"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/localMultaC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/responsavelmulta"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view19"
+            android:layout_below="@id/view30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/marcavia"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/MarcaVia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/localMultaC"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view20"
+            android:layout_below="@id/view19"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/matricuViatura"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/MatriculaVia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/MarcaVia"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view21"
+            android:layout_below="@id/view20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/servico"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/ServicoV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/MatriculaVia"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view22"
+            android:layout_below="@id/view21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/nota"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/notaM"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/ServicoV"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/view23"
+            android:layout_below="@id/view22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/valor"
+            android:gravity="center_vertical"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_margin="5sp"
+            android:id="@+id/valorM"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="25"
+            android:layout_below="@id/notaM"
+            android:gravity="right"
+            android:textSize="14dp"/>
+
+
+
+          <Button
+              android:layout_margin="5sp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_below="@id/valorM"
+              android:text="@string/OK"
+              android:onClick="goMenu"
+              />
+
+
+
+
+    </RelativeLayout>
+
+
+
+</ScrollView>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="mz.gerasoft.regulador_rodovia.ConsultarMulta">
+
+    <AutoCompleteTextView
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:textSize="17dp"
+        android:text="@string/pesquisa"
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentStart="true" />
+    <RadioGroup
+        android:id="@+id/radioGrup2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText2"
+        android:layout_toEndOf="@+id/textView8">
+    <RadioButton
+        android:id="@+id/radioButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pesquisaNome"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_toEndOf="@+id/textView8"
+        android:layout_marginStart="19dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton4"
+            android:layout_alignBottom="@+id/radioButton4"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="17dp"
+            android:text="@string/pesquisaCarta" />
+    </RadioGroup>
+
+
+    <ListView
+
+        android:id="@+id/lista"
+        android:layout_marginTop="10dp"
+        style="@style/Widget.AppCompat.Light.ListView.DropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:divider="#000000"
+        android:padding="1dp"
+        android:dividerHeight="1dp"
+        android:scrollbars="horizontal"
+
+        android:layout_below="@+id/radioGrup2" />
+
+    <TextView
+        android:id="@+id/nrMul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lista"
+        android:layout_alignParentEnd="true"
+        android:text="" />
+
+
+
+
+
+
+</RelativeLayout>
