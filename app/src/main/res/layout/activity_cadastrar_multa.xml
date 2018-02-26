@@ -103,6 +103,9 @@
             android:id="@+id/imageButton4"
             android:layout_width="54dp"
             android:layout_height="17dp"
+            android:onClick="mostrarTodosArtigos"
+
+
 
             app:srcCompat="@mipmap/ver" />
 
@@ -119,9 +122,10 @@
 
         <Spinner
             android:id="@+id/multiAutodisposto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/namedisposto" />
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/namedisposto"
+            />
 
         <ImageButton
             android:id="@+id/imageButton"

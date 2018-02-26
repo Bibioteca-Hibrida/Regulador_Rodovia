@@ -37,4 +37,7 @@ public final class webMethodUrl {
     public static String address_shownrcarta = "http://" +ipRR +"/shownrcarta1.php";
     public static String address_disposto1= "http://" +ipRR +"/dispoto1.php";
     public static String cadastro_url = "http://" +ipRR +"/cadastrarMulta.php";
+    public static String updt1 = "http://" +ipRR +"/update1.php";
+    public static String updt2 = "http://" +ipRR +"/update2.php";
+    public static String updt3 = "http://" +ipRR +"/update3.php";
 }

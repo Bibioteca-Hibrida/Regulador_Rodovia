@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,26 +34,116 @@ public class ConsultarMulta extends AppCompatActivity {
     AutoCompleteTextView editText2;
     ListView Multas;
     TextView nrmultas;
+    Spinner mes,ano,estado;
     RadioButton radioButton4,radioButton5;
     RadioGroup radioGrup2;
     webMethodUrl wb=new webMethodUrl();
     String nrcarta[],nomeCondutor[];
     public static String Nrcarta,nomecondutor;
     String idco[],multa[],nrc[];
-    String idC,nrC;
+    String idC,nrC,paramMes,paramAno,paramEstado;
     ArrayAdapter<String> adapter1;
+    String Mes []= {"Todos meses","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
+    String Ano [] = {"Todos anos","2018","2017","2016"};
+    String Estado[] = {"Todos estados","Transito","INATTER","Tribunal","Pago"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_multa);
 
-
+        mes = ((Spinner) findViewById(R.id.spinner));
+        ano = ((Spinner) findViewById(R.id.spinner2));
+        estado = ((Spinner) findViewById(R.id.spinner3));
         Multas = ((ListView) findViewById(R.id.lista));
         editText2 = ((AutoCompleteTextView) findViewById(R.id.editText2));
         radioButton4 = ((RadioButton) findViewById(R.id.radioButton4));
         radioButton5 = ((RadioButton) findViewById(R.id.radioButton5));
         nrmultas = ((TextView) findViewById(R.id.nrMul));
 
+
+        ArrayAdapter<String> adapter5 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Mes);
+        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mes.setAdapter(adapter5);
+
+        mes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapter5, View view, int i, long l) {
+
+                paramMes= mes.getSelectedItem().toString();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+
+        });
+
+
+        ArrayAdapter<String> adapter6 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Ano);
+        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ano.setAdapter(adapter6);
+        ano.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapter6, View view, int i, long l) {
+
+                paramAno= ano.getSelectedItem().toString();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+
+        });
+
+        ArrayAdapter<String> adapter7 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Estado);
+        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        estado.setAdapter(adapter7);
+
+        estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapter7, View view, int i, long l) {
+
+                paramEstado= estado.getSelectedItem().toString();
+
+               /* if(radioButton4.isChecked()){
+                    try {
+                        getnomeCondutor();
+                        getNrCarta();
+                        editText2.setText(nrC);
+                        Multas.setAdapter(null);
+                        getMultasbyNumber();
+
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    try {
+                        getnrcarta();
+                        Multas.setAdapter(null);
+                        getMultasbyNumber();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+
+                }*/
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+
+        });
 
         radioButton4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +268,8 @@ public class ConsultarMulta extends AppCompatActivity {
 
     }
 
+
+
     public void getDadoscondutor(){
         String result="";
         String line="";
@@ -294,10 +387,19 @@ public class ConsultarMulta extends AppCompatActivity {
 
             for (int i = 0; i < ja.length(); i++) {
                 jo = ja.getJSONObject(i);
-                multa[i] = "Artigo numero: " + jo.getString("nr_artigo") + "\n" + "Disposto numero: " + jo.getString("numero_disposto") + "\n"
-                        + "Estado da multa: " + jo.getString("estado") + "\n" + "Data e Hora: " + jo.getString("datamulta") + "\n"
-                        + "Valor da multa: " + jo.getString("valor") + "Mts";
 
+                //if((!paramMes.equals("Todos meses")) && (!paramAno.equals("Todos anos")) && (!paramEstado.equals("Todos estados"))){
+                    //multa[i] = "Artigo numero: " + jo.getString("nr_artigo") + "\n" + "Disposto numero: " + jo.getString("numero_disposto") + "\n"
+                    //        + "Estado da multa: " + jo.getString("estado") + "\n" + "Data e Hora: " + jo.getString("datamulta") + "\n"
+                  //          + "Valor da multa: " + jo.getString("valor") + "Mts";
+                //}else if((paramMes.equals(jo.getString("datamulta").substring(5,6))) && (paramAno.equals(jo.getString("datamulta").substring(0,3))) && (paramEstado.equals(jo.getString("estado")))
+                    //|| (paramMes.equals(jo.getString("datamulta").substring(5,6))) && (!paramAno.equals(jo.getString("datamulta").substring(0,3))) && (!paramEstado.equals(jo.getString("estado"))) ||
+                  //      (!paramMes.equals(jo.getString("datamulta").substring(5,6))) && (paramAno.equals(jo.getString("datamulta").substring(0,3))) && (!paramEstado.equals(jo.getString("estado"))) ||
+                //(!paramMes.equals(jo.getString("datamulta").substring(5,6))) && (!paramAno.equals(jo.getString("datamulta").substring(0,3))) && (paramEstado.equals(jo.getString("estado")))) {
+                    multa[i] = "Artigo numero: " + jo.getString("nr_artigo") + "\n" + "Disposto numero: " + jo.getString("numero_disposto") + "\n"
+                            + "Estado da multa: " + jo.getString("estado") + "\n" + "Data e Hora: " + jo.getString("datamulta") + "\n"
+                            + "Valor da multa: " + jo.getString("valor") + "Mts";
+                //}
             }
 
             ArrayAdapter<String> adapter2;

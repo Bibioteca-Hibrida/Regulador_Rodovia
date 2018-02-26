@@ -32,15 +32,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText2"
         android:layout_toEndOf="@+id/textView8">
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pesquisaNome"
-        android:layout_alignBaseline="@+id/textView8"
-        android:layout_alignBottom="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8"
-        android:layout_marginStart="19dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView8"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_marginStart="19dp"
+            android:layout_toEndOf="@+id/textView8"
+            android:text="@string/pesquisaNome" />
 
         <RadioButton
             android:id="@+id/radioButton5"
@@ -57,7 +58,7 @@
     <ListView
 
         android:id="@+id/lista"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         style="@style/Widget.AppCompat.Light.ListView.DropDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +71,7 @@
 
         android:layout_below="@+id/radioGrup2" />
 
+
     <TextView
         android:id="@+id/nrMul"
         android:layout_width="wrap_content"
@@ -78,9 +80,28 @@
         android:layout_alignParentEnd="true"
         android:text="" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGrup2" />
 
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGrup2"
+        android:layout_alignStart="@+id/radioGrup2"
+        android:layout_marginStart="11dp" />
 
-
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGrup2"
+        android:layout_toEndOf="@+id/spinner2"
+        android:layout_marginStart="14dp" />
 
 
 </RelativeLayout>

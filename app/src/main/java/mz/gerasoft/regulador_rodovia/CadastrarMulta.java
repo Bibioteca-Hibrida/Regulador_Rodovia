@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     AutoCompleteTextView multiAutoCompleteCarta, multiAutoinfracao, multiAutodistrito, multiAutoprovincia, matriculaV;
     EditText nameCondutor, valor, nota, LocalInfacao;
     Spinner referenciaInfracao, multiAutodisposto, tipoMulta;
+    ListView artigosLista;
+
 
     webMethodUrl wb = new webMethodUrl();
     // String address_agenteDados =  "http://192.168.43.37/agente.php";
@@ -428,6 +431,30 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
         }
 
     }
+    public void mostrarTodosArtigos(final View v){
+        ArrayAdapter<String> adapter3 = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, infracao);
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
+        AlertDialog.Builder builder = alertDialog;
+        builder.setTitle("Artigos");
+        builder.setAdapter(adapter3, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+
+                multiAutoinfracao.setText(infracao[item].toString());
+                findDisposto(v);
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+
+
+
+        alert.show();
+        
+    }
+
 
     public void getprovincia() throws MalformedURLException {
         InputStream is = null;
@@ -641,6 +668,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     public void findDisposto(View v) {
         String result = "";
         String line = "";
+
 
         String nomeArtigo = multiAutoinfracao.getText().toString();
 

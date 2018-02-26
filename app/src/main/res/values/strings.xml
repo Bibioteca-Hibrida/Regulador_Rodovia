@@ -27,8 +27,8 @@
     <string name="cor">Cor da viatura:</string>
     <string name="proprietario">Nome do proprietario da viatura:</string>
     <string name="servico">Serviço da viatura:</string>
-    <string name="title_activity_main">main</string>
-    <string name="title_home">Home</string>
+    <string name="title_activity_main">Pagina principal</string>
+    <string name="title_home">Inicial</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="explicao">Como ocorreu?</string>
