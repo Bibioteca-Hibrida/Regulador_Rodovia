@@ -17,48 +17,48 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:textSize="17dp"
-        android:text="@string/pesquisa"
-        android:layout_below="@+id/editText2"
-        android:layout_alignParentStart="true" />
-    <RadioGroup
-        android:id="@+id/radioGrup2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_toEndOf="@+id/textView8">
+    <!--<TextView-->
+        <!--android:id="@+id/textView8"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="11dp"-->
+        <!--android:textSize="17dp"-->
+        <!--android:text="@string/pesquisa"-->
+        <!--android:layout_below="@+id/editText2"-->
+        <!--android:layout_alignParentStart="true" />-->
+    <!--<RadioGroup-->
+        <!--android:id="@+id/radioGrup2"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/editText2"-->
+        <!--android:layout_toEndOf="@+id/textView8">-->
 
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView8"
-            android:layout_alignBottom="@+id/textView8"
-            android:layout_marginStart="19dp"
-            android:layout_toEndOf="@+id/textView8"
-            android:text="@string/pesquisaNome" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/radioButton4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBaseline="@+id/textView8"-->
+            <!--android:layout_alignBottom="@+id/textView8"-->
+            <!--android:layout_marginStart="19dp"-->
+            <!--android:layout_toEndOf="@+id/textView8"-->
+            <!--android:text="@string/pesquisaNome" />-->
 
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/radioButton4"
-            android:layout_alignBottom="@+id/radioButton4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="17dp"
-            android:text="@string/pesquisaCarta" />
-    </RadioGroup>
+        <!--<RadioButton-->
+            <!--android:id="@+id/radioButton5"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBaseline="@+id/radioButton4"-->
+            <!--android:layout_alignBottom="@+id/radioButton4"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginEnd="17dp"-->
+            <!--android:text="@string/pesquisaCarta" />-->
+    <!--</RadioGroup>-->
 
 
     <ListView
 
         android:id="@+id/lista"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         style="@style/Widget.AppCompat.Light.ListView.DropDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,39 +69,40 @@
         android:dividerHeight="1dp"
         android:scrollbars="horizontal"
 
-        android:layout_below="@+id/radioGrup2" />
+        android:layout_below="@+id/editText2" />
 
 
     <TextView
         android:id="@+id/nrMul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lista"
+        android:layout_below="@+id/spinner3"
         android:layout_alignParentEnd="true"
         android:text="" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/radioGrup2" />
+        android:layout_below="@+id/editText2"
+       />
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioGrup2"
-        android:layout_alignStart="@+id/radioGrup2"
-        android:layout_marginStart="11dp" />
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioGrup2"
-        android:layout_toEndOf="@+id/spinner2"
-        android:layout_marginStart="14dp" />
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentEnd="true"
+        />
 
 
 </RelativeLayout>

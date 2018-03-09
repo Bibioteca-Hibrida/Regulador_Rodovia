@@ -40,4 +40,5 @@ public final class webMethodUrl {
     public static String updt1 = "http://" +ipRR +"/update1.php";
     public static String updt2 = "http://" +ipRR +"/update2.php";
     public static String updt3 = "http://" +ipRR +"/update3.php";
+    public static String address_showMultaCondutor2 = "http://" +ipRR +"/showMultacondutor2.php";
 }
