@@ -1,5 +1,7 @@
 package mz.gerasoft.regulador_rodovia;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -448,6 +450,9 @@ mes.setEnabled(false);
             Multas.setAdapter(adapter2);
             nrmultas.setText("Numero de multa/as: " + ja.length());
 
+//criacao de alert dialog
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
             Multas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
@@ -466,9 +471,20 @@ mes.setEnabled(false);
                         }
                     }
 
-                    Toast.makeText(ConsultarMulta.this, numero_artigo, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConsultarMulta.this, "dgdghdg" +numero_artigo, Toast.LENGTH_SHORT).show();
 
-
+//alert dialog
+                    alertDialog.setTitle(item)
+                            .setMessage(numero_artigo)
+                            .setCancelable(false)
+                            .setPositiveButton("OK",new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
 
 
                 }
@@ -564,10 +580,27 @@ mes.setEnabled(false);
                                 numero_artigo+=item.charAt(k);
                             }break;
 
+
+
+
+
                         }
                     }
 
-                    Toast.makeText(ConsultarMulta.this, numero_artigo, Toast.LENGTH_SHORT).show();
+//                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+//                    alertDialog.setTitle(item)
+//                            .setMessage(numero_artigo)
+//                            .setCancelable(false)
+//                            .setPositiveButton("OK",new DialogInterface.OnClickListener(){
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    dialogInterface.cancel();
+//                                }
+//                            });
+//                    AlertDialog alert = alertDialog.create();
+//                    alert.show();
+//
+//                    Toast.makeText(ConsultarMulta.this, numero_artigo, Toast.LENGTH_SHORT).show();
 
 
 

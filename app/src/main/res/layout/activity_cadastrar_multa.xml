@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -46,6 +47,16 @@
             android:inputType="textPersonName"
             android:layout_below="@+id/nameCondutor"
             />
+
+        <ImageButton
+            android:id="@+id/imageButton20"
+            android:layout_width="54dp"
+            android:layout_height="17dp"
+            android:onClick="mostrarDetalhesCondutor"
+
+
+
+            app:srcCompat="@mipmap/ver" />
 
         <TextView
             android:id="@+id/idmatricula"

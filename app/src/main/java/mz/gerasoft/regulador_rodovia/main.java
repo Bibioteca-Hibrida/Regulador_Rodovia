@@ -6,10 +6,13 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +33,10 @@ import java.net.URLEncoder;
 
 public class main extends AppCompatActivity {
     webMethodUrl wb = new webMethodUrl();
+    private static SeekBar seek_bar;
+    private static TextView text_view;
 
-    private TextView mTextMessage;
+   // private TextView mTextMessage;
 
     @Override
     public void onBackPressed() {
@@ -47,27 +52,27 @@ public class main extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.CaMulta:
                     Intent i = new Intent(main.this, CadastrarMulta.class);
                     startActivity(i);
-                    mTextMessage.setText("Multa");
+                    //mTextMessage.setText("Multa");
                     return true;
                 case R.id.CoMulta:
                     Intent j = new Intent(main.this, ConsultarMulta.class);
                     startActivity(j);
-                    mTextMessage.setText("Consultar Multa");
+                    //mTextMessage.setText("Consultar Multa");
                     return true;
                 case R.id.CoArtigo:
                     Intent k = new Intent(main.this, ConsultarArtigo.class);
                     startActivity(k);
-                    mTextMessage.setText("Consultar Artigo");
+                   // mTextMessage.setText("Consultar Artigo");
                     return true;
                 case R.id.Grelatorio:
                     Intent l = new Intent(main.this, GerarRelatorio.class);
                     startActivity(l);
-                    mTextMessage.setText("Gerar Relatorio");
+                   // mTextMessage.setText("Gerar Relatorio");
                     return true;
 
             }
@@ -76,21 +81,64 @@ public class main extends AppCompatActivity {
 
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
+        seebar();
         //allw network in main thread
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
         //Retrive
         updateMultas1();
         updateMultas2();
         updateMultas3();
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+            MenuInflater menuInflater =getMenuInflater();
+            menuInflater.inflate(R.menu.definicoes,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.sair:
+                Intent i = new Intent(main.this,login.class);
+                startActivity(i);
+
+            case R.id.conta:
+                Intent j = new Intent(main.this,cadastrarAgente.class);
+                startActivity(j);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void seebar(){
+        text_view = (TextView) findViewById(R.id.textView5);
+        seek_bar = (SeekBar) findViewById(R.id.seekBar);
+
+
+
+        seek_bar.setProgress(1);
+        seek_bar.setMax(10);
+
+        text_view.setText("Tem: " +seek_bar.getProgress() +" " + "de: " +seek_bar.getMax() );
+
     }
 
     private void updateMultas1() {

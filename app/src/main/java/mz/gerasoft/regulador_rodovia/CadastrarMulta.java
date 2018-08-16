@@ -154,7 +154,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
 
                 String item = referenciaInfracao.getSelectedItem().toString();
 
-                Toast.makeText(CadastrarMulta.this, item, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CadastrarMulta.this, item, Toast.LENGTH_SHORT).show();
                 getinfracao(view);
 
 
