@@ -3,6 +3,7 @@ package mz.gerasoft.regulador_rodovia;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,10 @@ public class ConsultarMulta extends AppCompatActivity {
     String Estado[] = {"Todos estados","Transito","INATTER","Tribunal","Pago"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionbar = getSupportActionBar();
+
+        actionbar.setTitle("Espaço de consulta de multa");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_multa);
 
