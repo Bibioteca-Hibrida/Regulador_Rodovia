@@ -1,5 +1,7 @@
 package mz.gerasoft.regulador_rodovia;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -28,11 +31,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class cadastrarAgente extends AppCompatActivity {
-EditText apelido,editnome,editsenha,editsenha1;
+EditText apelido,editnome;
     Spinner graduacao,typeuser;
     webMethodUrl wb = new webMethodUrl();
 
-    String lastID,idgraduacao,idtipoUser;
+    String lastID,idgraduacao,idtipoUser,codigoAgente;
     String graduacaol[],tipouser[],lastid[];
 
     @Override
@@ -45,8 +48,7 @@ EditText apelido,editnome,editsenha,editsenha1;
 
         apelido = (EditText) findViewById(R.id.apelido);
         editnome = (EditText) findViewById(R.id.editnome);
-        editsenha = (EditText) findViewById(R.id.editsenha);
-        editsenha1 = (EditText) findViewById(R.id.editsenha1);
+
 
         graduacao = (Spinner) findViewById(R.id.graduacao);
         typeuser = (Spinner) findViewById(R.id.usertype);
@@ -58,63 +60,93 @@ EditText apelido,editnome,editsenha,editsenha1;
         //Retrive
         getLastID();
 
-       Toast.makeText(this, "---" +lastID, Toast.LENGTH_SHORT).show();
-       getGraduacao();
+        Toast.makeText(this, "---" +lastID, Toast.LENGTH_SHORT).show();
+        getGraduacao();
 
-        Toast.makeText(this, "idARtigo"+idgraduacao, Toast.LENGTH_SHORT).show();
 
-//        gettipoUser();
+       gettipoUser();
 
-        ArrayAdapter<String> adapter5 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, graduacaol);
-        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        graduacao.setAdapter(adapter5);
 
-       graduacao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapter5, View view, int i, long l) {
 
-                String item = graduacao.getSelectedItem().toString();
 
-                //Toast.makeText(cadastrarAgente.this, item, Toast.LENGTH_SHORT).show();
+        //
+//
 
-                getidGraduacao(item);
+
+
+
+    }
+
+
+    public void onCadatro(View v) {
+
+        // Toast.makeText(this, agenteid, Toast.LENGTH_SHORT).show();
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+
+
+        AlertDialog  alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Cadastro Status: ");
+
+
+        getidGraduacao();
+
+        Toast.makeText(this, "idtipo-"+idgraduacao, Toast.LENGTH_SHORT).show();
+
+        getidtipouser();
+
+        Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
+
+
+        try {
+
+           int x = Integer.parseInt(lastID) + 001;
+
+            codigoAgente = String.valueOf(x);
+            String nome = (editnome.getText().toString()) + (apelido.getText().toString());
+            String senha = "0000";
+
+            URL url = new URL(wb.cadastro_agente.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("codigoAgente", "UTF-8") + "=" + URLEncoder.encode(codigoAgente, "UTF-8") + "&"
+                    + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&"
+                    + URLEncoder.encode("senha", "UTF-8") + "=" + URLEncoder.encode(senha, "UTF-8") + "&"
+                    + URLEncoder.encode("idgraduacao", "UTF-8") + "=" + URLEncoder.encode(idgraduacao, "UTF-8") + "&"
+                    + URLEncoder.encode("idacesso", "UTF-8") + "=" + URLEncoder.encode(idtipoUser, "UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            String result = "";
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            if (result.equals("Criado novo utilizador:")) {
+                alertDialog.setMessage(result);
+                alertDialog.show();
+                Intent i = new Intent(this.getApplicationContext(), cadastrarAgente.class);
+                this.startActivity(i);
+            } else {
+                alertDialog.setMessage(result);
+                alertDialog.show();
 
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-
-
-        });
-//
-//
-//        ArrayAdapter<String> adapter6 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tipouser);
-//        adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        typeuser.setAdapter(adapter6);
-//
-//        typeuser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapter6, View view, int i, long l) {
-//
-//                String item = typeuser.getSelectedItem().toString();
-//
-//
-//                Toast.makeText(cadastrarAgente.this, item, Toast.LENGTH_SHORT).show();
-//
-//                getidtipouser(item);
-//
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//
-//
-//        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -217,7 +249,9 @@ EditText apelido,editnome,editsenha,editsenha1;
             e.printStackTrace();
         }
 
-
+        ArrayAdapter<String> adapter5 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, graduacaol);
+        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        graduacao.setAdapter(adapter5);
 
     }
 
@@ -269,12 +303,19 @@ EditText apelido,editnome,editsenha,editsenha1;
             e.printStackTrace();
         }
 
+                ArrayAdapter<String> adapter6 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tipouser);
+        adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeuser.setAdapter(adapter6);
+
 
     }
 
-    public void getidGraduacao(String i){
+    public void getidGraduacao() {
+
         String result="";
         String line="";
+        String nomegraduacao = graduacao.getSelectedItem().toString();
+        Toast.makeText(this, "idtipo-"+nomegraduacao, Toast.LENGTH_SHORT).show();
         try {
             URL url = new URL(wb.address_idgraduacao.toString());
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -283,9 +324,9 @@ EditText apelido,editnome,editsenha,editsenha1;
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("i","UTF-8")+"="+URLEncoder.encode(i,"UTF-8");
+            String post_data = URLEncoder.encode("nomegraduacao","UTF-8")+"="+URLEncoder.encode(nomegraduacao,"UTF-8");
             bufferedWriter.write(post_data);
-
+              Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
@@ -300,7 +341,8 @@ EditText apelido,editnome,editsenha,editsenha1;
             }
             result=sb.toString();
 
-            ;
+            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
             inputStream.close();
 
 
@@ -312,13 +354,16 @@ EditText apelido,editnome,editsenha,editsenha1;
         }
 
         try{
-
+            Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
             JSONObject jo= null;
-
+            Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
             graduacaol = new String[ja.length()];
+
             jo=ja.getJSONObject(0);
-            idgraduacao=  (jo.getString("idgraduacao"));
+
+            idgraduacao=(jo.getString("idgraduacao"));
 
 
 
@@ -328,12 +373,15 @@ EditText apelido,editnome,editsenha,editsenha1;
         }
 
 
+
+
     }
 
-    public void getidtipouser (String i){
+    public void getidtipouser (){
 
         String result="";
         String line="";
+        String i = typeuser.getSelectedItem().toString();
         try {
             URL url = new URL(wb.address_idacesso.toString());
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -381,12 +429,18 @@ EditText apelido,editnome,editsenha,editsenha1;
             jo=ja.getJSONObject(0);
             idtipoUser=  (jo.getString("idacesso"));
 
-            Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
 
         }catch (Exception e)
         {
             e.printStackTrace();
         }
+
+    }
+
+    public void cleanSpace (View view){
+       apelido.setText(null);
+        editnome.setText(null);
+
 
     }
 

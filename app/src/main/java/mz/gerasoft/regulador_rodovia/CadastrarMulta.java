@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,7 +71,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     String disposto[];
     String distrito[];
     public static String Distrito;
-    String idco[];
+    String idco[],nrmultas[];
     String idC;
     String idart[];
     public static String idA;
@@ -86,12 +87,15 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     String idDistri;
     String idProv;
     String agenteid;
-    String item;
+    String item,nrMultas;
 
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionbar = getSupportActionBar();
+
+        actionbar.setTitle("Cadastro de multa");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_multa);
         login l = new login();
@@ -928,6 +932,117 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             alert.show();
         }
 
+
+    public void mostrarDetalhesCondutor(View v){
+        try {
+        getDadoscondutor();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        String qtdTransito,qtdInatter,qtdTribunal;
+        getdadosmultasCondutor(idC,"Transito");
+        qtdTransito=nrMultas;
+        nrMultas=null;
+        getdadosmultasCondutor(idC,"INATTER");
+        qtdInatter=nrMultas;
+        nrMultas=null;
+        getdadosmultasCondutor(idC,"Tribunal");
+        qtdTribunal=nrMultas;
+
+
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
+        alertDialog.setTitle("Estado do condutor")
+                .setMessage( qtdTransito +"\n" +qtdInatter +"\n" + qtdTribunal)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+
+    public void getdadosmultasCondutor(String idcondutor,String op){
+        String result="";
+        String line="";
+        try {
+            URL url = new URL(wb.address_detalhesMulta.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("idcondutor","UTF-8")+"="+URLEncoder.encode(idcondutor,"UTF-8") + "&"
+                    + URLEncoder.encode("op", "UTF-8") + "=" + URLEncoder.encode(op, "UTF-8");
+            bufferedWriter.write(post_data);
+            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+
+            StringBuilder sb=new StringBuilder();
+
+            while((line=bufferedReader.readLine())!=null){
+                sb.append(line+"\n");
+
+            }
+            result=sb.toString();
+
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo= null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+            nrmultas = new String[ja.length()];
+
+            jo=ja.getJSONObject(0);
+
+            if(op.equals("Transito")) {
+
+                nrMultas = "Multas Transito: " + (jo.getString("multas_transito"));// +"Multas INATTER: " +(jo.getString("multas_INATTER"))
+
+            }else if(op.equals("INATTER")){
+                nrMultas = "Multas INATTER: " + (jo.getString("multas_INATTER"));
+
+            } else if(op.equals("Tribunal")){
+
+            nrMultas = "Multas Tribunal: " + (jo.getString("multas_Tribunal"));
+        }
+
+//            //  +"Multas Tribunal: " + (jo.getString("multas_Tribunal"));
+//            Toast.makeText(this, "numero multas: " +nrMultas, Toast.LENGTH_SHORT).show();
+
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     public void getDadoscondutor() throws MalformedURLException {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Regulador Rodoviario</string>
     <string name="entrar">Entrar</string>
     <string name="codigo">Digite o seu codigo do agente</string>
     <string name="senha">Digite a sua senha do agente</string>

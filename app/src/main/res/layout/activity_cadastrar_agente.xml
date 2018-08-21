@@ -6,6 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:background="#FFFFFF"
     android:weightSum="1"
 
     android:layout_marginTop="50dp"
@@ -50,32 +51,6 @@
         android:id="@+id/graduacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Senha:" />
-
-    <EditText
-        android:id="@+id/editsenha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Repita a senha:" />
-
-    <EditText
-        android:id="@+id/editsenha1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/textView17"

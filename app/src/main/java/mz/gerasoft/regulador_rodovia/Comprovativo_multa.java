@@ -2,6 +2,7 @@ package mz.gerasoft.regulador_rodovia;
 
 import android.content.Intent;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,9 @@ public class Comprovativo_multa extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActionBar actionbar = getSupportActionBar();
+
+        actionbar.setTitle("Comprovativo da multa");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprovativo_multa);
 
