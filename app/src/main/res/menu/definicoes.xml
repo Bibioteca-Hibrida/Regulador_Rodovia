@@ -6,12 +6,23 @@
         android:id="@+id/conta"
         android:enabled="true"
         android:title="Conta"
+        android:icon="@mipmap/user"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/alterarSenha"
+        android:enabled="true"
+        android:title="Alterar senha"
+        android:icon="@mipmap/alterarpass"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/sair"
         android:enabled="true"
         android:title="sair"
+        android:icon="@mipmap/cancelar"
         app:showAsAction="never">
+
+
 
 
     </item>

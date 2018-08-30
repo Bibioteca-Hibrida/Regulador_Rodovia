@@ -33,7 +33,9 @@
             android:name=".main"
             android:label="@string/title_activity_main" />
         <activity android:name=".Comprovativo_multa" />
-        <activity android:name=".cadastrarAgente"></activity>
+        <activity android:name=".cadastrarAgente" />
+        <activity android:name=".alterarsenha" />
+        <activity android:name=".contas"></activity>
     </application>
 
 </manifest>

@@ -102,7 +102,7 @@ EditText apelido,editnome;
            int x = Integer.parseInt(lastID) + 001;
 
             codigoAgente = String.valueOf(x);
-            String nome = (editnome.getText().toString()) + (apelido.getText().toString());
+            String nome = (editnome.getText().toString()) +" " + (apelido.getText().toString());
             String senha = "0000";
 
             URL url = new URL(wb.cadastro_agente.toString());

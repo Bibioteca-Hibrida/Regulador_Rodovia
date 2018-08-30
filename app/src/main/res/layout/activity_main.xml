@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
+    android:background="@drawable/testeback"
+
     tools:context="mz.gerasoft.regulador_rodovia.main">
 
     <FrameLayout
@@ -18,49 +20,52 @@
             android:id="@+id/textClock"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:textSize="30dp"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:background="#00FA9A"
-            android:text="Agentes em serviço"
+            android:id="@+id/agentesOnlines"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="450dp"
+            android:background="#FF0000"
+            android:text="2"
+            android:layout_marginLeft="30dp"
             android:textAlignment="center"
-            android:textSize="18dp" />
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:saveEnabled="true"/>
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
             android:textSize="12dp" />
+        <ImageView
+            android:id="@+id/imageView2"
 
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@mipmap/user"
 
-
+            />
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="220dp"
-            android:background="#00FFFF"
-            android:text="Multas actuais"
+            android:id="@+id/multasactuais"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="450dp"
+            android:background="#FF0000"
+            android:text="2"
+            android:layout_marginLeft="90dp"
             android:textAlignment="center"
-            android:textSize="18dp" />
+            android:textSize="12dp" />
+        <ImageView
+            android:id="@+id/imageView3"
 
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="match_parent"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="270dp" />
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="450dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@mipmap/relatorio"
+
+            />
+
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView

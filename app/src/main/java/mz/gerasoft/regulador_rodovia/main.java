@@ -33,7 +33,7 @@ import java.net.URLEncoder;
 
 public class main extends AppCompatActivity {
     webMethodUrl wb = new webMethodUrl();
-    private static SeekBar seek_bar;
+    //private static SeekBar seek_bar;
     private static TextView text_view;
 
    // private TextView mTextMessage;
@@ -93,7 +93,7 @@ public class main extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        seebar();
+       // seebar();
         //allw network in main thread
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
         //Retrive
@@ -119,27 +119,37 @@ public class main extends AppCompatActivity {
             case R.id.sair:
                 Intent i = new Intent(main.this,login.class);
                 startActivity(i);
+                return true;
 
             case R.id.conta:
                 Intent j = new Intent(main.this,cadastrarAgente.class);
                 startActivity(j);
+
+                return true;
+
+            case R.id.alterarSenha:
+                Intent k = new Intent(main.this,alterarsenha.class);
+                startActivity(k);
+                return true;
+
+
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void seebar(){
-        text_view = (TextView) findViewById(R.id.textView5);
-        seek_bar = (SeekBar) findViewById(R.id.seekBar);
-
-
-
-        seek_bar.setProgress(1);
-        seek_bar.setMax(10);
-
-        text_view.setText("Tem: " +seek_bar.getProgress() +" " + "de: " +seek_bar.getMax() );
-
-    }
+//    public void seebar(){
+//        text_view = (TextView) findViewById(R.id.textView5);
+//        seek_bar = (SeekBar) findViewById(R.id.seekBar);
+//
+//
+//
+//        seek_bar.setProgress(1);
+//        seek_bar.setMax(10);
+//
+//        text_view.setText("Tem: " +seek_bar.getProgress() +" " + "de: " +seek_bar.getMax() );
+//
+//    }
 
     private void updateMultas1() {
         InputStream is = null;
