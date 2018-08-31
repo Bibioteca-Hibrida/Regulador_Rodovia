@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:layout_marginTop="50dp"
+
     android:orientation="vertical"
     tools:context="mz.gerasoft.regulador_rodovia.alterarsenha">
 
 
     <TextView
+        android:layout_marginTop="100dp"
         android:id="@+id/textView18"
         android:layout_width="match_parent"
+        android:textSize="18dp"
         android:layout_height="wrap_content"
         android:text="Senha anterior:" />
 
@@ -26,6 +28,7 @@
 
     <TextView
         android:id="@+id/textView19"
+        android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nova senha:" />
@@ -40,6 +43,7 @@
 
     <TextView
         android:id="@+id/textView20"
+        android:textSize="18dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Repita a nova senha:" />

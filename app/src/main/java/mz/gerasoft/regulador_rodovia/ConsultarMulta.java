@@ -61,8 +61,8 @@ public class ConsultarMulta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_multa);
 
-        mes = ((Spinner) findViewById(R.id.spinner));
-        ano = ((Spinner) findViewById(R.id.spinner2));
+//        mes = ((Spinner) findViewById(R.id.spinner));
+//        ano = ((Spinner) findViewById(R.id.spinner2));
         estado = ((Spinner) findViewById(R.id.spinner3));
         Multas = ((ListView) findViewById(R.id.lista));
         editText2 = ((AutoCompleteTextView) findViewById(R.id.editText2));

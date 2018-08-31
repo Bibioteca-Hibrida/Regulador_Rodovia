@@ -49,7 +49,7 @@ public class ConsultarArtigo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar actionbar = getSupportActionBar();
 
-        actionbar.setTitle("Espaço de consulta de artido e disposto");
+        actionbar.setTitle("Consulta de artigo");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultar_artigo);
         artReferencia = (Spinner) findViewById(R.id.Artigos);

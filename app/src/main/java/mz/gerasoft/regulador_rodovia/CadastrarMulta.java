@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -46,21 +47,15 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     EditText nameCondutor, valor, nota, LocalInfacao;
     Spinner referenciaInfracao, multiAutodisposto, tipoMulta;
     ListView artigosLista;
+    String marca, servico, tipo, cor;
 
 
     webMethodUrl wb = new webMethodUrl();
     // String address_agenteDados =  "http://192.168.43.37/agente.php";
 
-    public static String viaturaMatricula;
-    public static String nomeDisposto;
-    public static String moneyMulta;
-    public static String detalhes;
-    public static String nomeArtigo;
-    public static String nomeReferencia;
-    public static String nomeResponsavel;
-    public static String nomeLocal;
+    public static String viaturaMatricula, nomeDisposto, moneyMulta, detalhes, nomeArtigo, nomeReferencia, nomeResponsavel, nomeLocal;
 
-    String nrcarta[];
+    String nrcarta[], viatura[];
     public static String Nrcarta;
     String infracao[];
     String provincia[];
@@ -71,7 +66,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     String disposto[];
     String distrito[];
     public static String Distrito;
-    String idco[],nrmultas[];
+    String idco[], nrmultas[];
     String idC;
     String idart[];
     public static String idA;
@@ -87,7 +82,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     String idDistri;
     String idProv;
     String agenteid;
-    String item,nrMultas;
+    String item, nrMultas;
 
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
@@ -435,7 +430,8 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
         }
 
     }
-    public void mostrarTodosArtigos(final View v){
+
+    public void mostrarTodosArtigos(final View v) {
         ArrayAdapter<String> adapter3 = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, infracao);
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
@@ -454,9 +450,8 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
         AlertDialog alert = alertDialog.create();
 
 
-
         alert.show();
-        
+
     }
 
 
@@ -734,9 +729,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             multiAutodisposto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapter5, View view, int i, long l) {
-                 item = adapter5.getItemAtPosition(i).toString();
-
-
+                    item = adapter5.getItemAtPosition(i).toString();
 
 
                     findMoneyMulta(view);
@@ -777,186 +770,146 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             });*/
 
 
+        } catch (
+                Exception e)
+
+        {
+            e.printStackTrace();
+        }
 
 
-
-    } catch(
-    Exception e)
-
-    {
-        e.printStackTrace();
     }
 
 
+    public void findDistrito(View v) {
+        String result = "";
+        String line = "";
+        String nomeProvincia = multiAutoprovincia.getText().toString();
+        try {
+            URL url = new URL(wb.address_distrito.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("nomeProvincia", "UTF-8") + "=" + URLEncoder.encode(nomeProvincia, "UTF-8");
+            bufferedWriter.write(post_data);
+            //Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
+
+            }
+            result = sb.toString();
+
+            //  Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-
-    public void findDistrito(View v){
-        String result="";
-        String line="";
-            String nomeProvincia = multiAutoprovincia.getText().toString();
-            try {
-                URL url = new URL(wb.address_distrito.toString());
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("nomeProvincia", "UTF-8") + "=" + URLEncoder.encode(nomeProvincia, "UTF-8");
-                bufferedWriter.write(post_data);
-                //Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-
-                StringBuilder sb = new StringBuilder();
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line + "\n");
-
-                }
-                result = sb.toString();
-
-              //  Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-                // bufferedReader.close();
-                inputStream.close();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            // Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo = null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+            distrito = new String[ja.length()];
+            for (int i = 0; i < ja.length(); i++) {
+                jo = ja.getJSONObject(i);
+                distrito[i] = jo.getString("descricao");
             }
 
-            try {
-                // Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
-                JSONArray ja = new JSONArray(result);
-                JSONObject jo = null;
-                //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
-                // nomeconduto=jo.getString("nome");
-                distrito = new String[ja.length()];
-                for (int i = 0; i < ja.length(); i++) {
-                    jo = ja.getJSONObject(i);
-                    distrito[i] = jo.getString("descricao");
-                }
+            ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.select_dialog_item, distrito);
+            multiAutodistrito.setThreshold(1);
+            multiAutodistrito.setAdapter(adapter);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.select_dialog_item, distrito);
-                multiAutodistrito.setThreshold(1);
-                multiAutodistrito.setAdapter(adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+
+    public void findMoneyMulta(View v) {
+        String result = "";
+        String line = "";
+
+
+        String nomeDisposto = multiAutodisposto.getSelectedItem().toString();
+        try {
+            URL url = new URL(wb.address_valormulta.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("nomeDisposto", "UTF-8") + "=" + URLEncoder.encode(nomeDisposto, "UTF-8");
+            bufferedWriter.write(post_data);
+            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
+
             }
+            result = sb.toString();
+
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        try {
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo = null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+            valorMulta = new String[ja.length()];
 
-    public void findMoneyMulta(View v){
-        String result="";
-        String line="";
-
-
-            String nomeDisposto = multiAutodisposto.getSelectedItem().toString();
-            try {
-                URL url = new URL(wb.address_valormulta.toString());
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.setDoInput(true);
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("nomeDisposto", "UTF-8") + "=" + URLEncoder.encode(nomeDisposto, "UTF-8");
-                bufferedWriter.write(post_data);
-                //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-
-                StringBuilder sb = new StringBuilder();
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line + "\n");
-
-                }
-                result = sb.toString();
-
-                //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-                // bufferedReader.close();
-                inputStream.close();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
-                JSONArray ja = new JSONArray(result);
-                JSONObject jo = null;
-                //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
-                // nomeconduto=jo.getString("nome");
-                valorMulta = new String[ja.length()];
-
-                jo = ja.getJSONObject(0);
-                // Toast.makeText(this, jo.getString("nome"), Toast.LENGTH_SHORT).show();
-                valor.setText(jo.getString("valor") + "Mts");
+            jo = ja.getJSONObject(0);
+            // Toast.makeText(this, jo.getString("nome"), Toast.LENGTH_SHORT).show();
+            valor.setText(jo.getString("valor") + "Mts");
             /*for(int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
                 matricula[i]=jo.getString("matricula");
             }*/
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    public void mostrarArtigo(View v){
-            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
-            alertDialog.setTitle("Disposto")
-                    .setMessage(item)
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-            AlertDialog alert = alertDialog.create();
-            alert.show();
-        }
-
-
-    public void mostrarDetalhesCondutor(View v){
-        try {
-        getDadoscondutor();
-
-
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        String qtdTransito,qtdInatter,qtdTribunal;
-        getdadosmultasCondutor(idC,"Transito");
-        qtdTransito=nrMultas;
-        nrMultas=null;
-        getdadosmultasCondutor(idC,"INATTER");
-        qtdInatter=nrMultas;
-        nrMultas=null;
-        getdadosmultasCondutor(idC,"Tribunal");
-        qtdTribunal=nrMultas;
-
-
-
+    public void mostrarArtigo(View v) {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
-        alertDialog.setTitle("Estado do condutor")
-                .setMessage( qtdTransito +"\n" +qtdInatter +"\n" + qtdTribunal)
+        alertDialog.setTitle("Disposto")
+                .setMessage(item)
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -969,18 +922,53 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     }
 
 
-    public void getdadosmultasCondutor(String idcondutor,String op){
-        String result="";
-        String line="";
+    public void mostrarDetalhesCondutor(View v) {
+        try {
+            getDadoscondutor();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        String qtdTransito, qtdInatter, qtdTribunal;
+        getdadosmultasCondutor(idC, "Transito");
+        qtdTransito = nrMultas;
+        nrMultas = null;
+        getdadosmultasCondutor(idC, "INATTER");
+        qtdInatter = nrMultas;
+        nrMultas = null;
+        getdadosmultasCondutor(idC, "Tribunal");
+        qtdTribunal = nrMultas;
+
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(CadastrarMulta.this);
+        alertDialog.setTitle("Estado do condutor")
+                .setMessage(qtdTransito + "\n" + qtdInatter + "\n" + qtdTribunal)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+
+    public void getdadosmultasCondutor(String idcondutor, String op) {
+        String result = "";
+        String line = "";
         try {
             URL url = new URL(wb.address_detalhesMulta.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("idcondutor","UTF-8")+"="+URLEncoder.encode(idcondutor,"UTF-8") + "&"
+            String post_data = URLEncoder.encode("idcondutor", "UTF-8") + "=" + URLEncoder.encode(idcondutor, "UTF-8") + "&"
                     + URLEncoder.encode("op", "UTF-8") + "=" + URLEncoder.encode(op, "UTF-8");
             bufferedWriter.write(post_data);
             //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
@@ -988,20 +976,19 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
-
 
 
         } catch (MalformedURLException e) {
@@ -1010,34 +997,33 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             e.printStackTrace();
         }
 
-        try{
+        try {
             //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
+            JSONObject jo = null;
             //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             nrmultas = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
+            jo = ja.getJSONObject(0);
 
-            if(op.equals("Transito")) {
+            if (op.equals("Transito")) {
 
                 nrMultas = "Multas Transito: " + (jo.getString("multas_transito"));// +"Multas INATTER: " +(jo.getString("multas_INATTER"))
 
-            }else if(op.equals("INATTER")){
+            } else if (op.equals("INATTER")) {
                 nrMultas = "Multas INATTER: " + (jo.getString("multas_INATTER"));
 
-            } else if(op.equals("Tribunal")){
+            } else if (op.equals("Tribunal")) {
 
-            nrMultas = "Multas Tribunal: " + (jo.getString("multas_Tribunal"));
-        }
+                nrMultas = "Multas Tribunal: " + (jo.getString("multas_Tribunal"));
+            }
 
 //            //  +"Multas Tribunal: " + (jo.getString("multas_Tribunal"));
 //            Toast.makeText(this, "numero multas: " +nrMultas, Toast.LENGTH_SHORT).show();
 
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1046,38 +1032,37 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
 
 
     public void getDadoscondutor() throws MalformedURLException {
-        String result="";
-        String line="";
+        String result = "";
+        String line = "";
         String nrcarta = multiAutoCompleteCarta.getText().toString();
         try {
             URL url = new URL(wb.address_idcondutor.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("nrcarta","UTF-8")+"="+URLEncoder.encode(nrcarta,"UTF-8");
+            String post_data = URLEncoder.encode("nrcarta", "UTF-8") + "=" + URLEncoder.encode(nrcarta, "UTF-8");
             bufferedWriter.write(post_data);
             //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
-
 
 
         } catch (MalformedURLException e) {
@@ -1086,63 +1071,60 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             e.printStackTrace();
         }
 
-        try{
+        try {
             //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
+            JSONObject jo = null;
             //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             idco = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
+            jo = ja.getJSONObject(0);
 
-            idC=(jo.getString("idcondutor"));
-            Toast.makeText(this, "idcondutor" +idC, Toast.LENGTH_SHORT).show();
+            idC = (jo.getString("idcondutor"));
+            Toast.makeText(this, "idcondutor" + idC, Toast.LENGTH_SHORT).show();
 
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
 
     public void getidArtigo() throws MalformedURLException {
 
-        String result="";
-        String line="";
-         nomeArtigo =multiAutoinfracao.getText().toString();
+        String result = "";
+        String line = "";
+        nomeArtigo = multiAutoinfracao.getText().toString();
         try {
             URL url = new URL(wb.address_idartigo.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("nomeArtigo","UTF-8")+"="+URLEncoder.encode(nomeArtigo,"UTF-8");
+            String post_data = URLEncoder.encode("nomeArtigo", "UTF-8") + "=" + URLEncoder.encode(nomeArtigo, "UTF-8");
             bufferedWriter.write(post_data);
-             // Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
-
 
 
         } catch (MalformedURLException e) {
@@ -1151,128 +1133,120 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             e.printStackTrace();
         }
 
-        try{
+        try {
             //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
-           // Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            JSONObject jo = null;
+            // Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             idart = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
-           idA=(jo.getString("idartigo"));
+            jo = ja.getJSONObject(0);
+            idA = (jo.getString("idartigo"));
 
-            Toast.makeText(this, "idARtigo"+idA, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "idARtigo" + idA, Toast.LENGTH_SHORT).show();
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
     }
 
-    public void getidDisposto()throws MalformedURLException {
+    public void getidDisposto() throws MalformedURLException {
 
-        String result="";
-        String line="";
-        nomeDisposto=multiAutodisposto.getSelectedItem().toString();
+        String result = "";
+        String line = "";
+        nomeDisposto = multiAutodisposto.getSelectedItem().toString();
         try {
             URL url = new URL(wb.address_iddisposto.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("nomeDisposto","UTF-8")+"="+URLEncoder.encode(nomeDisposto,"UTF-8");
+            String post_data = URLEncoder.encode("nomeDisposto", "UTF-8") + "=" + URLEncoder.encode(nomeDisposto, "UTF-8");
             bufferedWriter.write(post_data);
-             // Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
 
 
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try{
-           //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+        try {
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
-           // Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            JSONObject jo = null;
+            // Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             iddisp = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
+            jo = ja.getJSONObject(0);
 
-            idDisp=(jo.getString("iddisposto"));
-            Toast.makeText(this,"idisposto"+idDisp, Toast.LENGTH_LONG).show();
+            idDisp = (jo.getString("iddisposto"));
+            Toast.makeText(this, "idisposto" + idDisp, Toast.LENGTH_LONG).show();
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
 
     }
 
     public void getidVeiculo() throws MalformedURLException {
 
-        String result="";
-        String line="";
-        String veiculoMatricula =matriculaV.getText().toString();
+        String result = "";
+        String line = "";
+        String veiculoMatricula = matriculaV.getText().toString();
         try {
             URL url = new URL(wb.address_idveiculo.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("veiculoMatricula","UTF-8")+"="+URLEncoder.encode(veiculoMatricula,"UTF-8");
+            String post_data = URLEncoder.encode("veiculoMatricula", "UTF-8") + "=" + URLEncoder.encode(veiculoMatricula, "UTF-8");
             bufferedWriter.write(post_data);
             //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
-
 
 
         } catch (MalformedURLException e) {
@@ -1281,64 +1255,60 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             e.printStackTrace();
         }
 
-        try{
+        try {
             //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
+            JSONObject jo = null;
             //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             idveiculo = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
+            jo = ja.getJSONObject(0);
 
-            id_Veiculo =(jo.getString("idveiculo"));
-            Toast.makeText(this,"idvei" +id_Veiculo, Toast.LENGTH_SHORT).show();
+            id_Veiculo = (jo.getString("idveiculo"));
+            Toast.makeText(this, "idvei" + id_Veiculo, Toast.LENGTH_SHORT).show();
 
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
     }
 
-    public void getidDistritoProvincia()throws MalformedURLException {
+    public void getidDistritoProvincia() throws MalformedURLException {
 
-        String result="";
-        String line="";
-        String distritoNome =multiAutodistrito.getText().toString();
+        String result = "";
+        String line = "";
+        String distritoNome = multiAutodistrito.getText().toString();
         try {
             URL url = new URL(wb.address_iddistrito.toString());
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setDoInput(true);
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("distritoNome","UTF-8")+"="+URLEncoder.encode(distritoNome,"UTF-8");
+            String post_data = URLEncoder.encode("distritoNome", "UTF-8") + "=" + URLEncoder.encode(distritoNome, "UTF-8");
             bufferedWriter.write(post_data);
-              //Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
             InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb=new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            while((line=bufferedReader.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
-            result=sb.toString();
+            result = sb.toString();
 
             //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
-
 
 
         } catch (MalformedURLException e) {
@@ -1347,105 +1317,189 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             e.printStackTrace();
         }
 
-        try{
+        try {
             //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
-            JSONObject jo= null;
+            JSONObject jo = null;
             //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             iddistri = new String[ja.length()];
 
-            jo=ja.getJSONObject(0);
+            jo = ja.getJSONObject(0);
 
-            idDistri=(jo.getString("iddistrito"));
-            idProv=(jo.getString("idprovincia"));
-           Toast.makeText(this, idDistri + idProv , Toast.LENGTH_SHORT).show();
+            idDistri = (jo.getString("iddistrito"));
+            idProv = (jo.getString("idprovincia"));
+            Toast.makeText(this, idDistri + idProv, Toast.LENGTH_SHORT).show();
             //Toast.makeText(this, idProv, Toast.LENGTH_SHORT).show();
 
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
     }
 
-    public void getidagente(String idAgente){
+    public void getidagente(String idAgente) {
 
-        agenteid=idAgente;
+        agenteid = idAgente;
         Toast.makeText(this, agenteid, Toast.LENGTH_SHORT).show();
 
     }
 
-    public void cleanSpace (View view){
+    public void cleanSpace(View view) {
         multiAutoCompleteCarta.setText(null);
-                multiAutoinfracao.setText(null);
-                multiAutodisposto.setEnabled(false);
-                multiAutodistrito.setText(null);
+        multiAutoinfracao.setText(null);
+        multiAutodisposto.setEnabled(false);
+        multiAutodistrito.setText(null);
         multiAutodistrito.setEnabled(false);
-                multiAutoprovincia.setText(null);
-                matriculaV.setText(null);
-         nameCondutor.setText(null);
-                 valor.setText(null);
-                 nota.setText(null);
+        multiAutoprovincia.setText(null);
+        matriculaV.setText(null);
+        nameCondutor.setText(null);
+        valor.setText(null);
+        nota.setText(null);
 
 
     }
 
     public void getTipo_multa() throws MalformedURLException {
         InputStream is = null;
-        String line=null;
-        String result=null;
-        try{
+        String line = null;
+        String result = null;
+        try {
             URL url = new URL(wb.address_tipo_multa.toString());
-            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            is=new BufferedInputStream(conn.getInputStream());
+            is = new BufferedInputStream(conn.getInputStream());
 
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //Read
-        try{
+        try {
 
-            BufferedReader br=new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb=new StringBuilder();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
 
-            while((line=br.readLine())!=null){
-                sb.append(line+"\n");
+            while ((line = br.readLine()) != null) {
+                sb.append(line + "\n");
 
             }
             is.close();
-            result=sb.toString();
-        }catch (Exception e)
-        {
+            result = sb.toString();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 //parse Json data
-        try{
+        try {
             JSONArray ja = new JSONArray(result);
-            JSONObject jo=null;
+            JSONObject jo = null;
 
             TipoMUlta = new String[ja.length()];
 
-            for(int i=0;i<ja.length();i++){
-                jo=ja.getJSONObject(i);
+            for (int i = 0; i < ja.length(); i++) {
+                jo = ja.getJSONObject(i);
 
-                TipoMUlta[i]=jo.getString("descricao");
+                TipoMUlta[i] = jo.getString("descricao");
             }
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+    public void finddadosVeiculo(View view) {
+        String result = "";
+        String line = "";
+        String matricula = matriculaV.getText().toString();
+        try {
+            URL url = new URL(wb.address_dadosVeiculo.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("matricula", "UTF-8") + "=" + URLEncoder.encode(matricula, "UTF-8");
+            bufferedWriter.write(post_data);
+            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
+
+            }
+            result = sb.toString();
+
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo = null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+            viatura = new String[ja.length()];
+
+            jo = ja.getJSONObject(0);
+            // Toast.makeText(this, jo.getString("nome"), Toast.LENGTH_SHORT).show();
+
+
+            marca = (jo.getString("marcaveiculo"));
+            servico = (jo.getString("servicoVeiculo"));
+            tipo = (jo.getString("tipo"));
+            cor = (jo.getString("cor"));
+
+
+
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Dados do veiculo:")
+                .setMessage("Marca: " + marca + "\n"
+                        + "Cor: " + cor + "\n"
+                        + "Tipo: " + tipo + "\n"
+                        + "Serviço: " + servico)
+                .setCancelable(false)
+                .setPositiveButton("Entendi", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
+
+        //  condutor=nameCondutor.getText().toString();
+            /*for(int i=0;i<ja.length();i++){
+                jo=ja.getJSONObject(i);
+                matricula[i]=jo.getString("matricula");
+            }*/
+
+
+
 
 
     public void getidTipoMulta() throws MalformedURLException {

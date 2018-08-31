@@ -77,6 +77,13 @@ EditText apelido,editnome;
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, main.class);
+        startActivity(i);
+        super.onBackPressed();
+    }
+
 
     public void onCadatro(View v) {
 

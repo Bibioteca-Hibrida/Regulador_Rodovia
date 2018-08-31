@@ -3,6 +3,7 @@ package mz.gerasoft.regulador_rodovia;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -91,6 +92,15 @@ public class BackgroundWorkerLogin extends AsyncTask<String,Void,String> {
             alertDialog = new AlertDialog.Builder(context).create();
             alertDialog.setTitle("Login Status");
             alertDialog.setMessage(result);
+
+            alertDialog.setCancelable(false);
+                    alertDialog.setButton("OK",new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+
             alertDialog.show();
 
         }

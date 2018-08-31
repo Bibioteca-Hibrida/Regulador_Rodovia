@@ -20,10 +20,10 @@
 
         <TextView
             android:id="@+id/numeroCarta"
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nrcarta"
-            android:layout_marginTop="10dp"
             android:textSize="18dp"
             android:layout_alignBaseline="@+id/editText16"
             android:layout_alignBottom="@+id/editText16"
@@ -72,6 +72,17 @@
             android:layout_height="fill_parent"
             android:layout_below="@+id/idmatricula"
             />
+
+        <ImageButton
+            android:id="@+id/imageButton22"
+            android:layout_width="54dp"
+            android:layout_height="17dp"
+            android:onClick="finddadosVeiculo"
+
+
+
+            app:srcCompat="@mipmap/ver" />
+
 
         <TextView
             android:id="@+id/idrefencia"

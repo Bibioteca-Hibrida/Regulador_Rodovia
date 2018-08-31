@@ -1,11 +1,16 @@
 package mz.gerasoft.regulador_rodovia;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,8 +40,12 @@ public class main extends AppCompatActivity {
     webMethodUrl wb = new webMethodUrl();
     //private static SeekBar seek_bar;
     private static TextView text_view;
+   TextView agenteName;
+    String agenteN[],idacesso;
+    login l = new login();
+    MenuView.ItemView c;
 
-   // private TextView mTextMessage;
+   private TextView mTextMessage;
 
     @Override
     public void onBackPressed() {
@@ -52,28 +61,28 @@ public class main extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
+                   // mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.CaMulta:
                     Intent i = new Intent(main.this, CadastrarMulta.class);
                     startActivity(i);
-                    //mTextMessage.setText("Multa");
+                  // mTextMessage.setText("Cadastrar multa");
                     return true;
                 case R.id.CoMulta:
                     Intent j = new Intent(main.this, ConsultarMulta.class);
                     startActivity(j);
-                    //mTextMessage.setText("Consultar Multa");
+                   // mTextMessage.setText("Consultar multa");
                     return true;
                 case R.id.CoArtigo:
                     Intent k = new Intent(main.this, ConsultarArtigo.class);
                     startActivity(k);
-                   // mTextMessage.setText("Consultar Artigo");
+                  // mTextMessage.setText("Consultar artigo");
                     return true;
-                case R.id.Grelatorio:
-                    Intent l = new Intent(main.this, GerarRelatorio.class);
-                    startActivity(l);
-                   // mTextMessage.setText("Gerar Relatorio");
-                    return true;
+//                case R.id.Grelatorio:
+//                    Intent l = new Intent(main.this, GerarRelatorio.class);
+//                    startActivity(l);
+//                   // mTextMessage.setText("Gerar Relatorio");
+//                    return true;
 
             }
             return false;
@@ -85,9 +94,12 @@ public class main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        agenteName = (TextView) findViewById(R.id.nomeagente);
+c = (MenuView.ItemView) findViewById(R.id.conta);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -100,6 +112,7 @@ public class main extends AppCompatActivity {
         updateMultas1();
         updateMultas2();
         updateMultas3();
+        findNameAgente();
 
 
     }
@@ -115,25 +128,37 @@ public class main extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.sair:
-                Intent i = new Intent(main.this,login.class);
-                startActivity(i);
-                return true;
+            switch (item.getItemId()) {
+                case R.id.sair:
+                    Intent i = new Intent(main.this, pdf.class);
+                    startActivity(i);
+                    return true;
 
-            case R.id.conta:
-                Intent j = new Intent(main.this,cadastrarAgente.class);
-                startActivity(j);
+                case R.id.conta:
+                    if(idacesso.equals("1")){
+                    Intent j = new Intent(main.this, contas.class);
+                    startActivity(j);}else {
+                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                        alertDialog.setTitle("Info:")
+                                .setMessage("Impossivel aceder as contas, contacte ao administrador do sistema. obrigado")
+                                .setCancelable(false)
+                                .setPositiveButton("Entendi",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                        AlertDialog alert = alertDialog.create();
+                        alert.show();
+                    }
 
-                return true;
+                    return true;
 
-            case R.id.alterarSenha:
-                Intent k = new Intent(main.this,alterarsenha.class);
-                startActivity(k);
-                return true;
-
-
-        }
+                case R.id.alterarSenha:
+                    Intent k = new Intent(main.this, alterarsenha.class);
+                    startActivity(k);
+                    return true;
+            }
 
         return super.onOptionsItemSelected(item);
     }
@@ -151,6 +176,74 @@ public class main extends AppCompatActivity {
 //
 //    }
 
+
+   public void findNameAgente()  {
+        String result="";
+        String line="";
+        String cAgente = l.username;
+        try {
+            URL url = new URL(wb.address_nomeAgente.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("cAgente","UTF-8")+"="+URLEncoder.encode(cAgente,"UTF-8");
+            bufferedWriter.write(post_data);
+            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+
+            StringBuilder sb=new StringBuilder();
+
+            while((line=bufferedReader.readLine())!=null){
+                sb.append(line+"\n");
+
+            }
+            result=sb.toString();
+
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo= null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+            agenteN = new String[ja.length()];
+
+            jo=ja.getJSONObject(0);
+
+            agenteName.setText(jo.getString("nome"));
+            idacesso=(jo.getString("idacesso"));
+             //Toast.makeText(this, "aqui-"+idacesso, Toast.LENGTH_LONG).show();
+
+            //  condutor=nameCondutor.getText().toString();
+            /*for(int i=0;i<ja.length();i++){
+                jo=ja.getJSONObject(i);
+                matricula[i]=jo.getString("matricula");
+            }*/
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
     private void updateMultas1() {
         InputStream is = null;
         String line = null;
@@ -217,7 +310,7 @@ public class main extends AppCompatActivity {
             }
             result = sb.toString();
 
-            Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
             bufferedReader.close();
             inputStream.close();
 
@@ -256,7 +349,7 @@ public class main extends AppCompatActivity {
             }
             result = sb.toString();
 
-            Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
             bufferedReader.close();
             inputStream.close();
 

@@ -47,6 +47,12 @@ public class alterarsenha extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, main.class);
+        startActivity(i);
+        super.onBackPressed();
+    }
 
     public void alterar(View v) throws IOException {
         //Toast.makeText(this, l.username.toString(), Toast.LENGTH_SHORT).show();
