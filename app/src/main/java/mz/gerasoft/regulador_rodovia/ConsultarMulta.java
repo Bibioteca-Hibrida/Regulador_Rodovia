@@ -2,6 +2,7 @@ package mz.gerasoft.regulador_rodovia;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,8 +50,8 @@ public class ConsultarMulta extends AppCompatActivity {
     String idco[],multa[],nrc[];
     String idC,nrC,paramMes,paramAno,paramEstado;
     ArrayAdapter<String> adapter1;
-    String Mes []= {"Todos meses","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
-    String Ano [] = {"Todos anos","2018","2017","2016"};
+//    String Mes []= {"Todos meses","Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
+//    String Ano [] = {"Todos anos","2018","2017","2016"};
     String Estado[] = {"Todos estados","Transito","INATTER","Tribunal","Pago"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +82,9 @@ public class ConsultarMulta extends AppCompatActivity {
             e.printStackTrace();
         }
 
-mes.setEnabled(false);
+//mes.setEnabled(false);
         estado.setEnabled(false);
-        ano.setEnabled(false);
+//        ano.setEnabled(false);
         for(int i=0;i<nomeCondutor.length;i++){
             dados.add(nomeCondutor[i]);
         }
@@ -243,54 +244,54 @@ mes.setEnabled(false);
     }
 
     private void inicializarFiltros(){
-        mes.setEnabled(false);
+//        mes.setEnabled(false);
         estado.setEnabled(true);
-        ano.setEnabled(false);
+//        ano.setEnabled(false);
 
-        ArrayAdapter<String> adapter5 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Mes);
-        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mes.setAdapter(adapter5);
+//        ArrayAdapter<String> adapter5 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Mes);
+//        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mes.setAdapter(adapter5);
 
-        mes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapter5, View view, int i, long l) {
+//        mes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapter5, View view, int i, long l) {
+//
+//                paramMes= mes.getSelectedItem().toString();
+//
+//
+//            }
 
-                paramMes= mes.getSelectedItem().toString();
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-
-
-        });
-
-
-        ArrayAdapter<String> adapter6 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Ano);
-        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ano.setAdapter(adapter6);
-        ano.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapter6, View view, int i, long l) {
-
-                paramAno= ano.getSelectedItem().toString();
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//
+//
+//        });
 
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-
-
-        });
+//        ArrayAdapter<String> adapter6 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Ano);
+//        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        ano.setAdapter(adapter6);
+//        ano.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapter6, View view, int i, long l) {
+//
+//                paramAno= ano.getSelectedItem().toString();
+//
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//
+//
+//        });
 
         ArrayAdapter<String> adapter7 = new ArrayAdapter(this,android.R.layout.simple_spinner_item,Estado);
-        adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         estado.setAdapter(adapter7);
 
 
@@ -730,5 +731,12 @@ mes.setEnabled(false);
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, main.class);
+        startActivity(i);
+        super.onBackPressed();
     }
 }

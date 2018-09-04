@@ -136,7 +136,7 @@ c = (MenuView.ItemView) findViewById(R.id.conta);
 
                 case R.id.conta:
                     if(idacesso.equals("1")){
-                    Intent j = new Intent(main.this, contas.class);
+                    Intent j = new Intent(main.this,contas.class);
                     startActivity(j);}else {
                         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                         alertDialog.setTitle("Info:")

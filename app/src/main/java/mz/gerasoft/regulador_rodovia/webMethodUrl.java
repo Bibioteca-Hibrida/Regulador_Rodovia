@@ -49,6 +49,8 @@ public final class webMethodUrl {
     public static String address_idacesso="http://" +ipRR +"/idacesso.php";
     public static String cadastro_agente = "http://" +ipRR +"/cadastrarAgente.php";
     public static String alterarSenha = "http://" +ipRR +"/alterarSenha.php";
+    public static String dadosagente = "http://" +ipRR +"/dadosagente.php";
+    public static String verifBloqueio = "http://" +ipRR +"/verifblo.php";
 
 }
 

@@ -1,6 +1,7 @@
 package mz.gerasoft.regulador_rodovia;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
@@ -142,6 +143,9 @@ EditText apelido,editnome;
             if (result.equals("Criado novo utilizador:")) {
                 alertDialog.setMessage(result);
                 alertDialog.show();
+
+
+
                 Intent i = new Intent(this.getApplicationContext(), cadastrarAgente.class);
                 this.startActivity(i);
             } else {

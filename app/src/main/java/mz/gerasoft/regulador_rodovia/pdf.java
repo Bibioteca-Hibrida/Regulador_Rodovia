@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -15,13 +16,15 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import static android.os.Environment.getExternalStorageDirectory;
 
 public class pdf extends AppCompatActivity {
     String filename = "meu_documento.pdf";
-    File path = new File(getExternalStorageDirectory(), "PDFGerados");
+    File path = new File(Environment.getExternalStorageDirectory(), "PDFGerados");
     File pdffile = new File(path, filename);
 
     @Override
@@ -34,6 +37,8 @@ public class pdf extends AppCompatActivity {
             Document doc=new Document();
             PdfWriter.getInstance(doc, new FileOutputStream(pdffile));
             doc.open();//abrir o documento
+
+            Toast.makeText(this, "Aberto", Toast.LENGTH_SHORT).show();
 /*
       Criar instância de Parágrafo
       Podemos criar instância de simplesmente parâmetro para texto ou para texto e estilos de fonte
@@ -65,18 +70,45 @@ public class pdf extends AppCompatActivity {
             //depois de tudo fechamos o documento
             doc.close();
         }catch(Exception e){
+            Toast.makeText(this, "impossivel", Toast.LENGTH_SHORT).show();
         e.printStackTrace();
     }
-
-
-        //pegar o ficheiro
-        File file = new File(getExternalStorageDirectory().getPath()+"/PDFGerados"+"/"+filename);
-//criar o intent para visualização do documento
-        Uri caminho = Uri.fromFile(file);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(caminho, "application/pdf");
-        startActivity(intent);
-
-
-    }
+//
+//
+////        //pegar o ficheiro
+//        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/PDFGerados"+"/"+filename);
+////criar o intent para visualização do documento
+//        Uri caminho = Uri.fromFile(file);
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setDataAndType(caminho, "application/pdf");
+//        startActivity(intent);
+//
+//
+//    }
+// criação do objeto documento
+//        Document document = new Document();
+//
+//        try {
+//
+//
+//            try {
+//                PdfWriter.getInstance(document, new FileOutputStream("/Users/Public/pdf_ReceitasDeCodigo.pdf"));
+//            } catch (FileNotFoundException e) {
+//                Toast.makeText(this, "Impossivel", Toast.LENGTH_SHORT).show();
+//                e.printStackTrace();
+//            }
+//            document.open();
+//
+//            // adicionando um parágrafo ao documento
+//            document.add(new Paragraph("Gerando um PDF usando iText em Java"));
+//
+//            // adicionando um parágrafo com fonte diferente ao arquivo
+//            document.add(new Paragraph("Adicionando outro paragrafo", FontFactory.getFont(FontFactory.COURIER, 12)));
+//
+//        } catch (DocumentException de) {
+//            System.err.println(de.getMessage());
+//        } finally {
+//            document.close();
+//        }
+   }
 }

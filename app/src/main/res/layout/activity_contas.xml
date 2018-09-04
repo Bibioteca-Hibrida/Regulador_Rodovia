@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+
     tools:context="mz.gerasoft.regulador_rodovia.contas">
 
-</android.support.constraint.ConstraintLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/numeronomeagente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/numeronomeagente"
+        android:text=" + "
+        android:textColor="#2E8B57"
+        android:textSize="50dp"
+        android:clickable="true"
+        android:onClick="novocadastro"/>
+
+
+   <ListView
+
+        android:id="@+id/listaAgentes"
+        android:layout_marginTop="5dp"
+        style="@style/Widget.AppCompat.Light.ListView.DropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:divider="#000000"
+        android:padding="1dp"
+        android:dividerHeight="1dp"
+        android:scrollbars="horizontal"
+        android:layout_below="@+id/add" />
+
+
+
+
+
+
+</RelativeLayout>

@@ -3,6 +3,7 @@ package mz.gerasoft.regulador_rodovia;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
@@ -51,6 +52,8 @@ public class ConsultarArtigo extends AppCompatActivity {
 
         actionbar.setTitle("Consulta de artigo");
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_consultar_artigo);
         artReferencia = (Spinner) findViewById(R.id.Artigos);
         Listaart = (ListView) findViewById(R.id.listaArtigos);
@@ -307,6 +310,13 @@ public class ConsultarArtigo extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, main.class);
+        startActivity(i);
+        super.onBackPressed();
     }
 
 
