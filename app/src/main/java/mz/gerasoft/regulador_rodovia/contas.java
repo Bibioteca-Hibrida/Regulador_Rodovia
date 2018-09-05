@@ -90,7 +90,7 @@ public class contas extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
                 item= adapter1.getItemAtPosition(i).toString();
 
-                Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
 
              if(verificar(item,"nome").equals("Bloquear")){
 
@@ -101,8 +101,9 @@ public class contas extends AppCompatActivity {
                         .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                bloquearuser(item);
-                                // /dialogInterface.cancel();
+
+                                Toast.makeText(contas.this, bloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                                dialogInterface.cancel();
                             }
 
                         })
@@ -125,8 +126,8 @@ public class contas extends AppCompatActivity {
                          .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
                              @Override
                              public void onClick(DialogInterface dialogInterface, int i) {
-                                // bloquearuser(item);
-                                 // /dialogInterface.cancel();
+                                 Toast.makeText(contas.this, desbloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                                 dialogInterface.cancel();
                              }
 
                          })
@@ -176,7 +177,81 @@ public class contas extends AppCompatActivity {
 
     }
 
-    public void bloquearuser(String agente){
+    public String bloquearuser(String agente, String tipo){
+
+        try {
+            URL url = new URL(wb.bloquear.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("agente", "UTF-8") + "=" + URLEncoder.encode(agente, "UTF-8") + "&"
+                    + URLEncoder.encode("tipo", "UTF-8") + "=" + URLEncoder.encode(tipo, "UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            String result = "";
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            return result;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+
+    }
+
+    public String desbloquearuser(String agente, String tipo){
+
+        try {
+            URL url = new URL(wb.desbloquear.toString());
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("agente", "UTF-8") + "=" + URLEncoder.encode(agente, "UTF-8") + "&"
+                    + URLEncoder.encode("tipo", "UTF-8") + "=" + URLEncoder.encode(tipo, "UTF-8");
+            bufferedWriter.write(post_data);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            String result = "";
+            String line = "";
+            while ((line = bufferedReader.readLine()) != null) {
+                result += line;
+            }
+            bufferedReader.close();
+            inputStream.close();
+            httpURLConnection.disconnect();
+
+            return result;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
 
     }
 
@@ -237,6 +312,71 @@ public class contas extends AppCompatActivity {
             adapter2 = new ArrayAdapter(this,android.R.layout.simple_list_item_single_choice,aux);
             agentes.setAdapter(adapter2);
 
+            agentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
+                    item= adapter1.getItemAtPosition(i).toString();
+
+                    Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
+
+                    if(verificar(item,"nome").equals("Bloquear")){
+
+                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(contas.this);
+                        alertDialog.setTitle("Bloquear user")
+                                .setMessage("Deseja bloquear o agente: " +item +" ?")
+                                .setCancelable(false)
+                                .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        Toast.makeText(contas.this, bloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                                        dialogInterface.cancel();
+                                    }
+
+                                })
+                                .setNegativeButton("Não",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+                                    }
+
+                                });
+                        AlertDialog alert = alertDialog.create();
+                        alert.show();
+
+                    }else{
+                        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(contas.this);
+                        alertDialog.setTitle("Desbloquear user")
+                                .setMessage("Deseja desbloquear o agente: " +item +" ?")
+                                .setCancelable(false)
+                                .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Toast.makeText(contas.this, desbloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                                        dialogInterface.cancel();
+                                    }
+
+                                })
+                                .setNegativeButton("Não",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        dialogInterface.cancel();
+                                    }
+
+                                });
+
+                        AlertDialog alert = alertDialog.create();
+                        alert.show();
+                    }
+
+
+                }
+
+
+            });
+
         }
 
 
@@ -258,6 +398,71 @@ public class contas extends AppCompatActivity {
             adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, aux);
             agentes.setAdapter(adapter2);
         }
+
+        agentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
+                item= adapter1.getItemAtPosition(i).toString();
+
+                Toast.makeText(contas.this, verificar(item,"nr"), Toast.LENGTH_LONG).show();
+
+                if(verificar(item,"nr").equals("Bloquear")){
+
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(contas.this);
+                    alertDialog.setTitle("Bloquear user")
+                            .setMessage("Deseja bloquear o agente: " +item +" ?")
+                            .setCancelable(false)
+                            .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    Toast.makeText(contas.this, bloquearuser(item,"nr"), Toast.LENGTH_LONG).show();
+                                    dialogInterface.cancel();
+                                }
+
+                            })
+                            .setNegativeButton("Não",new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+                                }
+
+                            });
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
+
+                }else{
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(contas.this);
+                    alertDialog.setTitle("Desbloquear user")
+                            .setMessage("Deseja desbloquear o agente: " +item +" ?")
+                            .setCancelable(false)
+                            .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(contas.this, desbloquearuser(item,"nr"), Toast.LENGTH_LONG).show();
+                                    dialogInterface.cancel();
+                                }
+
+                            })
+                            .setNegativeButton("Não",new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.cancel();
+                                }
+
+                            });
+
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
+                }
+
+
+            }
+
+
+        });
     }
 
 
@@ -302,7 +507,7 @@ public class contas extends AppCompatActivity {
 
             for(int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
-              nomeagente[i]=jo.getString("nome");
+              nomeagente[i]=jo.getString("nome") +"\n" +jo.getString("estado");
              //   Toast.makeText(this, nomeagente[0], Toast.LENGTH_SHORT).show();
 
             }
@@ -362,7 +567,7 @@ public class contas extends AppCompatActivity {
            // Toast.makeText(this, codigoagente[0], Toast.LENGTH_SHORT).show();
             for(int i=0;i<ja.length();i++){
                 jo=ja.getJSONObject(i);
-                codigoagente[i]=jo.getString("codigo");
+                codigoagente[i]=jo.getString("codigo") +"\n" +jo.getString("estado");
 
             // Toast.makeText(this, "jdh", Toast.LENGTH_SHORT).show();
            }

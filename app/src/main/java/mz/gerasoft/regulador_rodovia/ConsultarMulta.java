@@ -41,6 +41,7 @@ public class ConsultarMulta extends AppCompatActivity {
     ArrayList<String> dados= new ArrayList<>();
     ListView Multas;
     TextView nrmultas;
+    String idcondutor, idartigo,iddisposto,auto,iddistrito,idprovincia,estadoM,cagente,localmulta,tipomulta;
     Spinner mes,ano,estado;
 //    RadioButton radioButton4,radioButton5;
     RadioGroup radioGrup2;
@@ -478,10 +479,13 @@ public class ConsultarMulta extends AppCompatActivity {
                     }
 
                     Toast.makeText(ConsultarMulta.this, "dgdghdg" +numero_artigo, Toast.LENGTH_SHORT).show();
+    getmulta(numero_artigo);
+
+
 
 //alert dialog
                     alertDialog.setTitle(item)
-                            .setMessage(numero_artigo)
+                            .setMessage("olha" +numero_artigo)
                             .setCancelable(false)
                             .setPositiveButton("OK",new DialogInterface.OnClickListener(){
                                 @Override
@@ -495,6 +499,8 @@ public class ConsultarMulta extends AppCompatActivity {
 
                 }
             });
+
+
 
 
         }catch (Exception e)
@@ -733,10 +739,92 @@ public class ConsultarMulta extends AppCompatActivity {
 
     }
 
+    public void novocadastro(View view){
+        Intent i = new Intent(this, CadastrarMulta.class);
+        startActivity(i);
+    }
+
     @Override
     public void onBackPressed() {
         Intent i = new Intent(this, main.class);
         startActivity(i);
         super.onBackPressed();
+    }
+
+
+    public void getmulta(String data) {
+        String result = "";
+        String line = "";
+        try {
+            URL url = new URL(wb.address_nomecondutor);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            String post_data = URLEncoder.encode("data", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8");
+            bufferedWriter.write(post_data);
+            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            outputStream.close();
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+            StringBuilder sb = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line + "\n");
+
+            }
+            result = sb.toString();
+
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            // bufferedReader.close();
+            inputStream.close();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+            JSONArray ja = new JSONArray(result);
+            JSONObject jo = null;
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            // nomeconduto=jo.getString("nome");
+           idco = new String[ja.length()];
+
+            jo = ja.getJSONObject(0);
+            // Toast.makeText(this, jo.getString("nome"), Toast.LENGTH_SHORT).show();
+
+
+            idcondutor= jo.getString("idcondutor");
+            idartigo = jo.getString("idartigo");
+            iddisposto = jo.getString("iddisposto");
+            auto = jo.getString("auto");
+            iddistrito = jo.getString("iddistrito");
+            idprovincia=jo.getString("idprovincia");
+            estadoM=jo.getString("estado");
+            cagente = jo.getString("codigoAgente");
+            localmulta= jo.getString("localmulta");
+            tipomulta = jo.getString("tipomulta");
+
+            Toast.makeText(this, idcondutor + idartigo +iddisposto + auto +iddistrito +idprovincia +estadoM +cagente +localmulta +tipomulta, Toast.LENGTH_SHORT).show();
+
+
+            /*for(int i=0;i<ja.length();i++){
+                jo=ja.getJSONObject(i);
+                matricula[i]=jo.getString("matricula");
+            }*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

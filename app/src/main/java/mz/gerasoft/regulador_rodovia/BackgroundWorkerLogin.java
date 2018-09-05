@@ -67,6 +67,20 @@ public class BackgroundWorkerLogin extends AsyncTask<String,Void,String> {
 
                 return result;
             } catch (MalformedURLException e) {
+                alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Erro da rede");
+                alertDialog.setMessage("Sem conexao, por favor tente mais tarde");
+
+                alertDialog.setCancelable(false);
+                alertDialog.setButton("OK",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                alertDialog.show();
+
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();

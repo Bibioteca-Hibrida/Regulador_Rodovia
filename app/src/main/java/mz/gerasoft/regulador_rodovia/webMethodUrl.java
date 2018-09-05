@@ -51,6 +51,8 @@ public final class webMethodUrl {
     public static String alterarSenha = "http://" +ipRR +"/alterarSenha.php";
     public static String dadosagente = "http://" +ipRR +"/dadosagente.php";
     public static String verifBloqueio = "http://" +ipRR +"/verifblo.php";
+    public static String bloquear = "http://" +ipRR +"/bloquear.php";
+    public static String desbloquear = "http://" +ipRR +"/desbloquear.php";
 
 }
 

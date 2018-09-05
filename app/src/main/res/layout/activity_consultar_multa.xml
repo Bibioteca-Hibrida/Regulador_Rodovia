@@ -17,6 +17,20 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+
+    <TextView
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/editText2"
+        android:text=" + "
+        android:textColor="#2E8B57"
+        android:textSize="50dp"
+        android:clickable="true"
+        android:onClick="novocadastro"/>
+
     <!--<TextView-->
         <!--android:id="@+id/textView8"-->
         <!--android:layout_width="wrap_content"-->
