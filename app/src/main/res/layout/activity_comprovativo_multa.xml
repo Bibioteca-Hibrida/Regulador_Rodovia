@@ -8,7 +8,7 @@
     android:padding="10dp"
    >
 
-    <RelativeLayout
+   <!--RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -518,6 +518,6 @@
 
     </RelativeLayout>
 
-
+-->
 
 </ScrollView>

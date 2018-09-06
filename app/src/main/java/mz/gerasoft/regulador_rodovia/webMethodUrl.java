@@ -53,6 +53,8 @@ public final class webMethodUrl {
     public static String verifBloqueio = "http://" +ipRR +"/verifblo.php";
     public static String bloquear = "http://" +ipRR +"/bloquear.php";
     public static String desbloquear = "http://" +ipRR +"/desbloquear.php";
+    public static String escrever = "http://" +ipRR +"/escrever.php";
+    public static String ler = "http://" +ipRR +"/teste.php";
 
 }
 

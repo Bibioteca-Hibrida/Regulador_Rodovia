@@ -479,13 +479,29 @@ public class ConsultarMulta extends AppCompatActivity {
                     }
 
                     Toast.makeText(ConsultarMulta.this, "dgdghdg" +numero_artigo, Toast.LENGTH_SHORT).show();
-    getmulta(numero_artigo);
 
+                    int e;
+                    String aux="";
+                    for(e=0;e<numero_artigo.length();e++){
+                        if((numero_artigo.charAt(e)=='-') || ((numero_artigo.charAt(e)==':'))) {
+                            aux+='_';
+                        }else{
+                            aux+=numero_artigo.charAt(e);
+                        }
+
+                    }
+
+                    String leitura="";
+                    try {
+                       leitura = ler(aux);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
 
 
 //alert dialog
-                    alertDialog.setTitle(item)
-                            .setMessage("olha" +numero_artigo)
+                    alertDialog.setTitle("Multa de transito")
+                            .setMessage(leitura)
                             .setCancelable(false)
                             .setPositiveButton("OK",new DialogInterface.OnClickListener(){
                                 @Override
@@ -509,6 +525,49 @@ public class ConsultarMulta extends AppCompatActivity {
         }
 
     }
+
+
+    public String ler(String titulo) throws IOException {
+
+        URL url = null;
+        try {
+            url = new URL(wb.ler.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection httpURLConnection = null;
+        try {
+            httpURLConnection = (HttpURLConnection)url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        httpURLConnection.setRequestMethod("POST");
+        httpURLConnection.setDoOutput(true);
+        httpURLConnection.setDoInput(true);
+        OutputStream outputStream = httpURLConnection.getOutputStream();
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        String post_data = URLEncoder.encode("titulo","UTF-8")+"="+URLEncoder.encode(titulo,"UTF-8");
+        bufferedWriter.write(post_data);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        outputStream.close();
+        InputStream inputStream = httpURLConnection.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+        String result="";
+        String line="";
+        while((line = bufferedReader.readLine())!= null) {
+            result += line;
+        }
+        bufferedReader.close();
+        inputStream.close();
+        httpURLConnection.disconnect();
+
+        return result;
+
+
+
+    }
+
 
     public void getMultasbyNumberFilter(String param) {
         getDadoscondutor();
@@ -752,79 +811,5 @@ public class ConsultarMulta extends AppCompatActivity {
     }
 
 
-    public void getmulta(String data) {
-        String result = "";
-        String line = "";
-        try {
-            URL url = new URL(wb.address_nomecondutor);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setDoInput(true);
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            String post_data = URLEncoder.encode("data", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8");
-            bufferedWriter.write(post_data);
-            //  Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            outputStream.close();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
 
-            StringBuilder sb = new StringBuilder();
-
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line + "\n");
-
-            }
-            result = sb.toString();
-
-            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-            // bufferedReader.close();
-            inputStream.close();
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            //Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
-            JSONArray ja = new JSONArray(result);
-            JSONObject jo = null;
-            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
-            // nomeconduto=jo.getString("nome");
-           idco = new String[ja.length()];
-
-            jo = ja.getJSONObject(0);
-            // Toast.makeText(this, jo.getString("nome"), Toast.LENGTH_SHORT).show();
-
-
-            idcondutor= jo.getString("idcondutor");
-            idartigo = jo.getString("idartigo");
-            iddisposto = jo.getString("iddisposto");
-            auto = jo.getString("auto");
-            iddistrito = jo.getString("iddistrito");
-            idprovincia=jo.getString("idprovincia");
-            estadoM=jo.getString("estado");
-            cagente = jo.getString("codigoAgente");
-            localmulta= jo.getString("localmulta");
-            tipomulta = jo.getString("tipomulta");
-
-            Toast.makeText(this, idcondutor + idartigo +iddisposto + auto +iddistrito +idprovincia +estadoM +cagente +localmulta +tipomulta, Toast.LENGTH_SHORT).show();
-
-
-            /*for(int i=0;i<ja.length();i++){
-                jo=ja.getJSONObject(i);
-                matricula[i]=jo.getString("matricula");
-            }*/
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

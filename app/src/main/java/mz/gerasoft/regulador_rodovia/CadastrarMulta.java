@@ -1082,7 +1082,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo = ja.getJSONObject(0);
 
             idC = (jo.getString("idcondutor"));
-            Toast.makeText(this, "idcondutor" + idC, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "idcondutor" + idC, Toast.LENGTH_SHORT).show();
 
 
         } catch (Exception e) {
@@ -1144,7 +1144,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo = ja.getJSONObject(0);
             idA = (jo.getString("idartigo"));
 
-            Toast.makeText(this, "idARtigo" + idA, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "idARtigo" + idA, Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1183,7 +1183,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             }
             result = sb.toString();
 
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
 
@@ -1205,7 +1205,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo = ja.getJSONObject(0);
 
             idDisp = (jo.getString("iddisposto"));
-            Toast.makeText(this, "idisposto" + idDisp, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "idisposto" + idDisp, Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1266,7 +1266,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo = ja.getJSONObject(0);
 
             id_Veiculo = (jo.getString("idveiculo"));
-            Toast.makeText(this, "idvei" + id_Veiculo, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "idvei" + id_Veiculo, Toast.LENGTH_SHORT).show();
 
 
         } catch (Exception e) {
@@ -1329,7 +1329,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
 
             idDistri = (jo.getString("iddistrito"));
             idProv = (jo.getString("idprovincia"));
-            Toast.makeText(this, idDistri + idProv, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, idDistri + idProv, Toast.LENGTH_SHORT).show();
             //Toast.makeText(this, idProv, Toast.LENGTH_SHORT).show();
 
 
@@ -1343,7 +1343,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     public void getidagente(String idAgente) {
 
         agenteid = idAgente;
-        Toast.makeText(this, agenteid, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, agenteid, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -1555,7 +1555,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo=ja.getJSONObject(0);
 
             idTipo_multa=(jo.getString("idtipo_multa"));
-             Toast.makeText(this, "idtipo-"+idTipo_multa, Toast.LENGTH_SHORT).show();
+           //  Toast.makeText(this, "idtipo-"+idTipo_multa, Toast.LENGTH_SHORT).show();
 
 
 
