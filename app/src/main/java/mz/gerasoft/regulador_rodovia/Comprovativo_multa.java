@@ -147,9 +147,9 @@ public class Comprovativo_multa extends AppCompatActivity {
             Toast.makeText(this,titulodatahora, Toast.LENGTH_LONG).show();
 
             int i;
-            String aux="";
+            String aux="_";
             for(i=0;i<titulodatahora.length();i++){
-             if((titulodatahora.charAt(i)=='-') || ((titulodatahora.charAt(i)==':'))) {
+             if((titulodatahora.charAt(i)=='-') || ((titulodatahora.charAt(i)==':'))|| ((titulodatahora.charAt(i)==' '))) {
                  aux+='_';
              }else{
                  aux+=titulodatahora.charAt(i);
@@ -170,6 +170,7 @@ public class Comprovativo_multa extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
+                            goMenu();
                         }
                     });
             AlertDialog alert = alertDialog.create();
@@ -306,7 +307,7 @@ public class Comprovativo_multa extends AppCompatActivity {
             }
             result = sb.toString();
 
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
 
@@ -507,7 +508,7 @@ public class Comprovativo_multa extends AppCompatActivity {
 
     }
 
-    public void goMenu(View v){
+    public void goMenu(){
         Intent i = new Intent(this,main.class);
         startActivity(i);
     }

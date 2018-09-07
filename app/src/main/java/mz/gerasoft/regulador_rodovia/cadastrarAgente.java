@@ -61,7 +61,7 @@ EditText apelido,editnome;
         //Retrive
         getLastID();
 
-        Toast.makeText(this, "---" +lastID, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, "---" +lastID, Toast.LENGTH_SHORT).show();
         getGraduacao();
 
 
@@ -98,11 +98,11 @@ EditText apelido,editnome;
 
         getidGraduacao();
 
-        Toast.makeText(this, "idtipo-"+idgraduacao, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this, "idtipo-"+idgraduacao, Toast.LENGTH_SHORT).show();
 
         getidtipouser();
 
-        Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
 
 
         try {
@@ -143,8 +143,6 @@ EditText apelido,editnome;
             if (result.equals("Criado novo utilizador:")) {
                 alertDialog.setMessage(result);
                 alertDialog.show();
-
-
 
                 Intent i = new Intent(this.getApplicationContext(), cadastrarAgente.class);
                 this.startActivity(i);
@@ -326,7 +324,7 @@ EditText apelido,editnome;
         String result="";
         String line="";
         String nomegraduacao = graduacao.getSelectedItem().toString();
-        Toast.makeText(this, "idtipo-"+nomegraduacao, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "idtipo-"+nomegraduacao, Toast.LENGTH_SHORT).show();
         try {
             URL url = new URL(wb.address_idgraduacao.toString());
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -337,7 +335,7 @@ EditText apelido,editnome;
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
             String post_data = URLEncoder.encode("nomegraduacao","UTF-8")+"="+URLEncoder.encode(nomegraduacao,"UTF-8");
             bufferedWriter.write(post_data);
-              Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
+          //    Toast.makeText(this, post_data, Toast.LENGTH_SHORT).show();
             bufferedWriter.flush();
             bufferedWriter.close();
             outputStream.close();
@@ -352,7 +350,7 @@ EditText apelido,editnome;
             }
             result=sb.toString();
 
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
             // bufferedReader.close();
             inputStream.close();
 
@@ -365,10 +363,10 @@ EditText apelido,editnome;
         }
 
         try{
-            Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Helloo ", Toast.LENGTH_SHORT).show();
             JSONArray ja = new JSONArray(result);
             JSONObject jo= null;
-            Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "passou ", Toast.LENGTH_SHORT).show();
             // nomeconduto=jo.getString("nome");
             graduacaol = new String[ja.length()];
 

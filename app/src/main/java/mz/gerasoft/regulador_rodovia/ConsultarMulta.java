@@ -29,8 +29,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class ConsultarMulta extends AppCompatActivity {
     ArrayList<String> dados= new ArrayList<>();
     ListView Multas;
     TextView nrmultas;
+    String leitura="";
     String idcondutor, idartigo,iddisposto,auto,iddistrito,idprovincia,estadoM,cagente,localmulta,tipomulta;
     Spinner mes,ano,estado;
 //    RadioButton radioButton4,radioButton5;
@@ -458,7 +461,7 @@ public class ConsultarMulta extends AppCompatActivity {
             nrmultas.setText("Numero de multa/as: " + ja.length());
 
 //criacao de alert dialog
-            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
 
             Multas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -478,39 +481,34 @@ public class ConsultarMulta extends AppCompatActivity {
                         }
                     }
 
-                    Toast.makeText(ConsultarMulta.this, "dgdghdg" +numero_artigo, Toast.LENGTH_SHORT).show();
+
+
+
 
                     int e;
                     String aux="";
                     for(e=0;e<numero_artigo.length();e++){
-                        if((numero_artigo.charAt(e)=='-') || ((numero_artigo.charAt(e)==':'))) {
+                        if((numero_artigo.charAt(e)=='-') || ((numero_artigo.charAt(e)==':')) || ((numero_artigo.charAt(e)==' '))) {
                             aux+='_';
                         }else{
                             aux+=numero_artigo.charAt(e);
                         }
 
                     }
+Toast.makeText(ConsultarMulta.this,numero_artigo, Toast.LENGTH_SHORT).show();
+//
 
-                    String leitura="";
+                        String a;
+                        a=aux.toString();
                     try {
-                       leitura = ler(aux);
-                    } catch (IOException e1) {
+                        ler(a);
+                    } catch (ProtocolException e1) {
                         e1.printStackTrace();
                     }
 
 
 //alert dialog
-                    alertDialog.setTitle("Multa de transito")
-                            .setMessage(leitura)
-                            .setCancelable(false)
-                            .setPositiveButton("OK",new DialogInterface.OnClickListener(){
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
-                                }
-                            });
-                    AlertDialog alert = alertDialog.create();
-                    alert.show();
+
 
 
                 }
@@ -527,7 +525,7 @@ public class ConsultarMulta extends AppCompatActivity {
     }
 
 
-    public String ler(String titulo) throws IOException {
+    public void ler(String titulo) throws ProtocolException {
 
         URL url = null;
         try {
@@ -544,25 +542,102 @@ public class ConsultarMulta extends AppCompatActivity {
         httpURLConnection.setRequestMethod("POST");
         httpURLConnection.setDoOutput(true);
         httpURLConnection.setDoInput(true);
-        OutputStream outputStream = httpURLConnection.getOutputStream();
-        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-        String post_data = URLEncoder.encode("titulo","UTF-8")+"="+URLEncoder.encode(titulo,"UTF-8");
-        bufferedWriter.write(post_data);
-        bufferedWriter.flush();
-        bufferedWriter.close();
-        outputStream.close();
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+        OutputStream outputStream = null;
+        try {
+            outputStream = httpURLConnection.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String post_data = null;
+        try {
+            post_data = URLEncoder.encode("titulo","UTF-8")+"="+URLEncoder.encode(titulo,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            bufferedWriter.write(post_data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InputStream inputStream = null;
+        try {
+            inputStream = httpURLConnection.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String result="";
         String line="";
-        while((line = bufferedReader.readLine())!= null) {
-            result += line;
+        try {
+            while((line = bufferedReader.readLine())!=null) {
+
+                    result += line;
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bufferedReader.close();
-        inputStream.close();
+        try {
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         httpURLConnection.disconnect();
 
-        return result;
+        String aux="";
+        for(int i=0;i<result.length();i++){
+            if(result.charAt(i)=='|'){
+                aux+="\n";
+            }else{
+                aux+=result.charAt(i);
+            }
+        }
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("Multa de transito")
+                .setMessage(aux)
+                .setCancelable(false)
+                .setPositiveButton("OK",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+
 
 
 

@@ -90,7 +90,7 @@ public class contas extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
                 item= adapter1.getItemAtPosition(i).toString();
 
-                Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
+               // Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
 
              if(verificar(item,"nome").equals("Bloquear")){
 
@@ -102,7 +102,7 @@ public class contas extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
-                                Toast.makeText(contas.this, bloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                               // Toast.makeText(contas.this, bloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
                                 dialogInterface.cancel();
                             }
 
@@ -126,7 +126,7 @@ public class contas extends AppCompatActivity {
                          .setPositiveButton("SIM",new DialogInterface.OnClickListener(){
                              @Override
                              public void onClick(DialogInterface dialogInterface, int i) {
-                                 Toast.makeText(contas.this, desbloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
+                               //  Toast.makeText(contas.this, desbloquearuser(item,"nome"), Toast.LENGTH_LONG).show();
                                  dialogInterface.cancel();
                              }
 
@@ -317,7 +317,7 @@ public class contas extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
                     item= adapter1.getItemAtPosition(i).toString();
 
-                    Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(contas.this, verificar(item,"nome"), Toast.LENGTH_LONG).show();
 
                     if(verificar(item,"nome").equals("Bloquear")){
 
@@ -404,7 +404,7 @@ public class contas extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter1, View view, int i, long l) {
                 item= adapter1.getItemAtPosition(i).toString();
 
-                Toast.makeText(contas.this, verificar(item,"nr"), Toast.LENGTH_LONG).show();
+               // Toast.makeText(contas.this, verificar(item,"nr"), Toast.LENGTH_LONG).show();
 
                 if(verificar(item,"nr").equals("Bloquear")){
 

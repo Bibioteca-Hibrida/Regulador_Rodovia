@@ -37,15 +37,15 @@ public class login extends AppCompatActivity {
         }
 
     public void onLogin(View v){
-        if(isInternetConnected()) {
+//        if(isInternetConnected()) {
             username = codigoAgente.getText().toString();
             String password = senhaAgente.getText().toString();
             String type = "login";
             BackgroundWorkerLogin bk = new BackgroundWorkerLogin(this);
             bk.execute(type, username, password);
-        }else{
-            Toast.makeText(this, "Sem conexao", Toast.LENGTH_SHORT).show();
-        }
+//        }else{
+//            Toast.makeText(this, "Sem rede, tente mais tarde", Toast.LENGTH_LONG).show();
+//        }
         }
 
     @Override

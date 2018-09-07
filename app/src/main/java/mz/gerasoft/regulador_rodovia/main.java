@@ -269,13 +269,15 @@ c = (MenuView.ItemView) findViewById(R.id.conta);
 
             StringBuilder sb = new StringBuilder();
 
+
+
             while ((line = bufferedReader.readLine()) != null) {
                 sb.append(line + "\n");
 
             }
             result = sb.toString();
 
-            Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
              bufferedReader.close();
             inputStream.close();
 

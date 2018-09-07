@@ -38,14 +38,9 @@ public class alterarsenha extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alterarsenha);
 
-      senhaA = (EditText) findViewById(R.id.editText5);
+         senhaA = (EditText) findViewById(R.id.editText5);
         senhaN = (EditText) findViewById(R.id.editText6);
         senhaR = (EditText) findViewById(R.id.editText7);
-
-
-
-
-
     }
     @Override
     public void onBackPressed() {
@@ -55,8 +50,6 @@ public class alterarsenha extends AppCompatActivity {
     }
 
     public void alterar(View v) throws IOException {
-        //Toast.makeText(this, l.username.toString(), Toast.LENGTH_SHORT).show();
-
         if((!senhaN.getText().toString().equals(senhaR.getText().toString())) || (senhaA.getText().toString().isEmpty())){
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Info: ")
@@ -121,20 +114,8 @@ public class alterarsenha extends AppCompatActivity {
             startActivity(k);
     }
 
-
-
-
-
-
         }
-
-
-
-
-
-
-
     public void goMenu(View v){
-        cm.goMenu(v);
+        cm.goMenu();
     }
 }
