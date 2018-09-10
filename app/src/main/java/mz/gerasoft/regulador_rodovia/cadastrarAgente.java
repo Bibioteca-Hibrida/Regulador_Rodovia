@@ -26,8 +26,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -92,25 +94,24 @@ EditText apelido,editnome;
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
 
 
-        AlertDialog  alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Cadastro Status: ");
+
 
 
         getidGraduacao();
 
-     //   Toast.makeText(this, "idtipo-"+idgraduacao, Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(this, "idtipo-"+idgraduacao, Toast.LENGTH_SHORT).show();
 
         getidtipouser();
 
-       // Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "idARtigo"+idtipoUser, Toast.LENGTH_SHORT).show();
 
 
         try {
 
-           int x = Integer.parseInt(lastID) + 001;
+            int x = Integer.parseInt(lastID) + 001;
 
             codigoAgente = String.valueOf(x);
-            String nome = (editnome.getText().toString()) +" " + (apelido.getText().toString());
+            String nome = (editnome.getText().toString()) + " " + (apelido.getText().toString());
             String senha = "0000";
 
             URL url = new URL(wb.cadastro_agente.toString());
@@ -140,25 +141,76 @@ EditText apelido,editnome;
             inputStream.close();
             httpURLConnection.disconnect();
 
-            if (result.equals("Criado novo utilizador:")) {
-                alertDialog.setMessage(result);
-                alertDialog.show();
+            if (result.contains("Criado novo utilizador:")) {
+                final AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(this);
+                alertDialog1.setTitle("Cadastro de utilizador")
+                        .setMessage(result)
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                Intent i = new Intent(this.getApplicationContext(), cadastrarAgente.class);
-                this.startActivity(i);
+                                dialogInterface.cancel();
+
+
+
+                                // agentes.setAdapter(null);
+                                // agentes.setAdapter((ListAdapter) adapter1);
+                            }
+
+                        });
+
+
+
+                AlertDialog alert = alertDialog1.create();
+                alert.show();
+
             } else {
-                alertDialog.setMessage(result);
-                alertDialog.show();
+                final AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(this);
+                alertDialog1.setTitle("Cadastro de utilizador")
+                        .setMessage(result)
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                               // dialogInterface.cancel();
+                                apelido.setText(null);
+                                editnome.setText(null);
+                                star();
+
+                                // agentes.setAdapter(null);
+                                // agentes.setAdapter((ListAdapter) adapter1);
+                            }
+
+                        });
+
+
+                AlertDialog alert = alertDialog1.create();
+                alert.show();
 
             }
 
-
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
+
+
+
+public void star(){
+    Intent i = new Intent(this,cadastrarAgente.class);
+    this.startActivity(i);
+}
+
+
+
 
     public void getLastID(){
         InputStream is = null;

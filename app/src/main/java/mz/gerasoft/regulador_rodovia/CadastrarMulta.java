@@ -37,6 +37,7 @@ import java.net.URLEncoder;
 
 public class CadastrarMulta extends AppCompatActivity {
     AlertDialog alertDialog;
+
     /*TextView numeroCarta,nomeCondutor,nameInfra,namedisposto,idprovincia,iddistrito,idmatricula,idmarca,
     idtipoV,idclasseV,idcor,idservico,idnomeP,idnota,idvalor;
 AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,multiAutoprovincia,multiAutodistrito,multiAutomarca,
@@ -47,6 +48,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
     EditText nameCondutor, valor, nota, LocalInfacao;
     Spinner referenciaInfracao, multiAutodisposto, tipoMulta;
     ListView artigosLista;
+    String idcontravensao;
     String marca, servico, tipo, cor;
 
 
@@ -1205,6 +1207,7 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
             jo = ja.getJSONObject(0);
 
             idDisp = (jo.getString("iddisposto"));
+            idcontravensao = (jo.getString("idcontravensao"));
            // Toast.makeText(this, "idisposto" + idDisp, Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {

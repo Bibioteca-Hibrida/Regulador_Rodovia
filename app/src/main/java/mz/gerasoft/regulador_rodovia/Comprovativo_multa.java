@@ -330,6 +330,13 @@ public class Comprovativo_multa extends AppCompatActivity {
 
            // nrdisposto.setText((jo.getString("numero_disposto")));
             multa+="Disposto nr: " +(jo.getString("numero_disposto")) +"\n";
+            if(jo.getString("idcontravencao").equals("1")){
+                multa+="Tipo de contravensao: Leve" +"\n";
+            }else if(jo.getString("idcontravencao").equals("2")){
+                multa+="Tipo de contravensao: Media" +"\n";
+            }else if(jo.getString("idcontravencao").equals("3")) {
+                multa += "Tipo de contravensao: Grave" +"\n";
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -50,6 +50,7 @@ public class alterarsenha extends AppCompatActivity {
     }
 
     public void alterar(View v) throws IOException {
+        final Intent k = new Intent(this,main.class);
         if((!senhaN.getText().toString().equals(senhaR.getText().toString())) || (senhaA.getText().toString().isEmpty())){
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Info: ")
@@ -105,17 +106,19 @@ public class alterarsenha extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
+                            startActivity(k);
                         }
                     });
             AlertDialog alert = alertDialog.create();
             alert.show();
 
-            Intent k = new Intent(this,main.class);
-            startActivity(k);
+
+
     }
 
         }
     public void goMenu(View v){
-        cm.goMenu();
+        Intent k = new Intent(this,main.class);
+        startActivity(k);
     }
 }

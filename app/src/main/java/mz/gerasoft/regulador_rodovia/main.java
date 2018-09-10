@@ -135,7 +135,7 @@ c = (MenuView.ItemView) findViewById(R.id.conta);
     public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.sair:
-                    Intent i = new Intent(main.this, pdf.class);
+                    Intent i = new Intent(main.this, login.class);
                     startActivity(i);
                     return true;
 
@@ -147,7 +147,7 @@ c = (MenuView.ItemView) findViewById(R.id.conta);
                         alertDialog.setTitle("Info:")
                                 .setMessage("Impossivel aceder as contas, contacte ao administrador do sistema. obrigado")
                                 .setCancelable(false)
-                                .setPositiveButton("Entendi",new DialogInterface.OnClickListener(){
+                                .setPositiveButton("OK",new DialogInterface.OnClickListener(){
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         dialogInterface.cancel();
