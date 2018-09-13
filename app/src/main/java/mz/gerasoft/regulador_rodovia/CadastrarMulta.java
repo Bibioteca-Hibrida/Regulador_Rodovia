@@ -30,8 +30,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -244,18 +246,21 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
 
 
             //String cadastro_url = "http://192.168.43.37/cadastrarMulta.php";
-            try {
 
-                String idCondutor = idC;
-                String idArtigo = idA;
-                String idDisposto = idDisp;
-                String idVeiculo = id_Veiculo;
-                String idDistrito = idDistri;
-                String idProvincia = idProv;
-                String idAgente = agenteid;
-                String Descricao = nota.getText().toString();
-                String local_multa = LocalInfacao.getText().toString();
-                String idtipomulta = idTipo_multa;
+            String idCondutor = idC;
+            String idArtigo = idA;
+            String idDisposto = idDisp;
+            String idVeiculo = id_Veiculo;
+            String idDistrito = idDistri;
+            String idProvincia = idProv;
+            String idAgente = agenteid;
+            String Descricao = nota.getText().toString();
+            String local_multa = LocalInfacao.getText().toString();
+            String idtipomulta = idTipo_multa;
+
+
+//            Toast.makeText(this, "- " +idCondutor +" - " +idArtigo +" - " +idDisposto +" - " +idVeiculo +" - " +idDistrito
+//                    +" - " +idProvincia +" - " +idAgente +" - " +Descricao +" - " +local_multa +" - " +idtipomulta, Toast.LENGTH_SHORT).show();
 
 
                 URL url = new URL(wb.cadastro_url.toString());
@@ -302,12 +307,15 @@ AutoCompleteTextView multiAutoCompleteCarta,multiAutoinfracao,multiAutodisposto,
                 }
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
 
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
